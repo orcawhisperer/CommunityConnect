@@ -1,0 +1,1559 @@
+Product Requirements Document: "ConnectSphere TimeBank"
+Version: 2.1 (Comprehensive Final Draft - India Market Focus)
+Date: May 29, 2025
+Author: AI Assistant
+Status: Final Draft for Development Kick-off
+Table of Contents
+Introduction
+1.1 Purpose
+1.2 Vision
+1.3 Goals & Objectives
+1.4 Target Audience (India Focus)
+1.5 Scope (In/Out)
+1.6 Definitions & Acronyms
+User Personas & Stories
+2.1 Persona: Rina (Urban Professional)
+2.2 Persona: Mr. Kumar (Retiree)
+2.3 Persona: Aisha (Homemaker & Aspiring Entrepreneur)
+2.4 Persona: Admin Dev (Platform Operations)
+Functional Requirements
+3.1 User Account Management
+3.2 User Profile Management
+3.3 Service Listing Management (Offers & Requests)
+3.4 Service Discovery & Matching
+3.5 Service Exchange & SphereCredit Management
+3.6 Communication & Notifications
+3.7 Trust, Safety & Reviews
+3.8 Administration Panel
+3.9 Localization & Language Support
+Non-Functional Requirements
+4.1 Performance
+4.2 Scalability
+4.3 Availability & Reliability
+4.4 Security
+4.5 Usability & User Experience (UX/UI)
+4.6 Maintainability & Testability
+4.7 Data Management & Compliance
+4.8 Accessibility
+Design & User Experience (UX) Specifications
+5.1 Design Philosophy & Principles
+5.2 Branding & Visual Identity (Conceptual)
+5.3 Information Architecture & Navigation
+5.4 Key User Flows (Detailed Descriptions)
+5.5 UI Component Guidelines (Conceptual)
+5.6 Content Strategy & Tone of Voice
+5.7 Wireframes/Mockups (Placeholder - To be developed by Design Team based on these requirements)
+5.8 Style Guide (Placeholder - To be developed by Design Team)
+System Architecture
+6.1 Overview (High-Level Diagram Description)
+6.2 Frontend Architecture
+6.3 Backend Architecture
+6.4 API Design Principles
+6.5 Database Architecture
+6.6 Infrastructure & Deployment Strategy
+6.7 Third-Party Integrations
+Database Schema (Detailed)
+7.1 Users Table
+7.2 User_Auth_Tokens Table
+7.3 Skills Table
+7.4 Categories Table
+7.5 User_Skills_Offered Table
+7.6 Service_Listings Table
+7.7 Listing_Images Table
+7.8 Service_Exchanges Table
+7.9 Reviews Table
+7.10 Conversations Table
+7.11 Messages Table
+7.12 Notifications Table
+7.13 Reported_Content Table
+7.14 Admin_Users Table
+7.15 Audit_Logs Table
+7.16 Blocked_Users Table
+7.17 System_Parameters Table
+Risk Assessment & Mitigation Strategies
+(Detailed table of risks and specific mitigation strategies for the Indian context)
+Success Metrics & Key Performance Indicators (KPIs)
+9.1 User Acquisition & Growth
+9.2 User Engagement & Activity
+9.3 Community Health & Balance
+9.4 Platform Performance & Stability
+9.5 Trust & Satisfaction
+9.6 Operational Efficiency
+Future Considerations & Potential Roadmap (Post V1.0)
+Release Criteria (V1.0)
+Glossary
+Appendices (Optional)
+13.1 Community Guidelines Outline
+13.2 Privacy Policy Key Considerations
+13.3 Terms of Service Key Considerations
+
+1. Introduction
+1.1 Purpose: This document outlines the comprehensive product requirements for ConnectSphere TimeBank (hereafter "ConnectSphere"), a web-based platform (mobile-responsive, Progressive Web App - PWA prioritized) designed to facilitate time banking within Indian communities. It empowers users to exchange services and skills using "SphereCredits" (time-based currency) instead of money, fostering mutual support and community building.
+1.2 Vision: To cultivate vibrant, self-sustaining, and supportive local communities across India by enabling individuals to connect, share their diverse talents, and meet their needs through a fair, accessible, and trustworthy time exchange system.
+1.3 Goals & Objectives:
+Goal 1: Build a robust, secure, and user-friendly platform for time banking tailored to the Indian context.
+Objective 1.1: Achieve 10,000 verified registered users within 6 months of public launch in initial pilot cities (e.g., Bangalore, Pune).
+Objective 1.2: Facilitate a minimum of 1,000 successfully completed service exchanges within the first 6 months.
+Objective 1.3: Achieve a user satisfaction score (CSAT) of >75% on core platform features and overall experience, measured via in-app surveys post-exchange.
+Objective 1.4: Ensure >90% of critical user flows (registration, listing creation, exchange completion) are completed successfully without user-reported errors.
+Goal 2: Foster significant community engagement and strengthen social cohesion.
+Objective 2.1: Ensure an average of at least 2 positive interactions (e.g., message sent in an exchange context, offer made, request fulfilled) per active user per month.
+Objective 2.2: Achieve a 3-month active user retention rate of at least 30%.
+Objective 2.3: Facilitate an average of 1 new connection (first-time exchange) per active user every 2 months.
+
+
+Goal 3: Promote diverse skill utilization and ensure inclusivity.
+Objective 3.1: Have at least 50 distinct skill categories actively used (listings created or services exchanged) on the platform within 6 months.
+Objective 3.2: Ensure the platform adheres to WCAG 2.1 Level A accessibility standards, striving for AA, to be usable by people with diverse abilities.
+Objective 3.3: Achieve positive sentiment in user feedback regarding the fairness and inclusivity of the "hour-for-an-hour" model.
+
+
+1.4 Target Audience (India Focus):
+Primary: Urban and semi-urban individuals aged 18+ residing in India, who are digitally literate enough to use web/mobile applications and are open to non-monetary exchanges. This includes:
+Students (18+): Seeking academic help, offering tech skills, tutoring, event help.
+Homemakers: Offering cooking, baking, childcare, tailoring, traditional arts/crafts, language lessons.
+Working Professionals: Offering specialized skills (e.g., writing, marketing advice, financial literacy, coding help) in their spare time, or seeking help with errands, household tasks, pet care.
+Retirees: Offering mentorship, storytelling, gardening advice, companionship, needing tech help, light repairs, or errands.
+Skilled Individuals/Gig Workers (Part-time): Offering repairs, local transport (non-commercial context), event support, creative services.
+
+
+Secondary (Future Consideration - Post V1.5): Resident Welfare Associations (RWAs), Self-Help Groups (SHGs), local NGOs, community centers – for coordinating volunteer efforts or group activities using the timebank model.
+Exclusion Criteria for V1.0: Individuals below 18 years of age. Users without access to a web browser on a smartphone or computer. Commercial entities seeking to use the platform for profit.
+
+
+1.5 Scope:
+In Scope (V1.0):
+User Lifecycle: Secure user registration (username/password, email verification), login, "Forgot Password" functionality, user logout, account deactivation (voluntary).
+Profile Management: Creation and editing of detailed user profiles including personal information (name, general location), skills offered, skills needed, bio, profile picture, and general availability.
+Service Listing (Offers & Requests): CRUD operations for Service Offers and Service Requests, including title, detailed description, categorization, skill tagging, estimated time/SphereCredits, location preferences (virtual, user's place, provider's place, negotiable), image uploads, and listing status management (active, inactive).
+Discovery & Matching: Browsing and searching active Service Offers and Requests with filters (keyword, category, location - Pincode/city, service type) and sorting options.
+Exchange Initiation & Agreement: Mechanism for users to express interest in offers or offer help for requests, leading to an "Exchange Agreement" proposal and acceptance.
+Communication: Secure, private, one-to-one internal messaging system for users to discuss service details and coordinate.
+Exchange Fulfillment & Confirmation: Process for providers to mark services as delivered and requesters to confirm completion.
+SphereCredit Management: Automatic SphereCredit transfer upon mutual confirmation of service completion. User dashboard displaying current balance and detailed transaction history. Initial seed credits for new users.
+Trust & Safety: Double-blind user rating (1-5 stars) and review system post-exchange. User blocking functionality. Reporting mechanism for inappropriate users, content (listings, reviews, messages), or behavior.
+Administration: Secure admin panel for user account management (view, suspend, ban), content moderation (review and act on reported items, manage listings), dispute oversight (view exchange details, manually adjust SphereCredits with audit trail), management of predefined skill categories, platform announcements, and basic platform analytics.
+Platform Access: Mobile-responsive web design, prioritized development as a Progressive Web App (PWA) for an app-like experience, offline caching for essential static assets and PWA installation prompts.
+Language: User Interface (UI) primarily in English for V1.0. Users can input free-text (descriptions, messages) in English, Hinglish, or other Romanized Indian languages. Backend support for UTF-8.
+
+
+Out of Scope (V1.0):
+Native mobile applications (iOS, Android) – planned for future release.
+Phone number based OTP registration/login – potential for V1.x.
+Organizational accounts and features for RWAs/NGOs.
+Advanced gamification (badges, leaderboards beyond simple activity encouragement).
+Real-time GPS-based location tracking for services or users.
+Direct monetary transactions, payment gateway integrations, or any financial instruments.
+Complex, automated dispute resolution workflows (V1.0 relies on admin intervention for unresolved issues).
+IVR (Interactive Voice Response) based access for non-smartphone users.
+Integrated calendar/scheduling tools (users coordinate via messages).
+Group services/event creation and management features.
+Full UI localization into multiple Indian languages (UI in English first).
+Advanced AI-based matching algorithms (V1.0 uses user-driven search & browse).
+Advertising platform for third parties.
+
+
+
+
+1.6 Definitions & Acronyms:
+ConnectSphere: The official name of the TimeBank platform.
+SphereCredit: The unit of time-based currency used on the platform (standard: 1 hour of service = 1 SphereCredit).
+Provider: A registered user offering a service on the platform.
+Requester: A registered user requesting a service on the platform.
+Listing: A Service Offer or a Service Request posted on the platform.
+Exchange: An agreed-upon transaction of service between a Provider and a Requester.
+PWA: Progressive Web App.
+RWA: Resident Welfare Association.
+SHG: Self-Help Group.
+NGO: Non-Governmental Organization.
+UI: User Interface.
+UX: User Experience.
+API: Application Programming Interface.
+CRUD: Create, Read, Update, Delete.
+KPI: Key Performance Indicator.
+DPDPA: Digital Personal Data Protection Act, 2023 (India).
+IST: Indian Standard Time.
+WCAG: Web Content Accessibility Guidelines.
+CSAT: Customer Satisfaction Score.
+MAU: Monthly Active Users.
+DAU: Daily Active Users.
+
+
+2. User Personas & Stories
+(User stories are illustrative examples; a full backlog would contain many more for each feature and edge case.)
+2.1 Persona: Rina (Urban Professional)
+Description: 30-year-old marketing manager in Mumbai. Lives alone in a large apartment complex. Tech-savvy, uses various apps daily. Enjoys yoga, has intermediate graphic design skills. Limited free time, often needs help with household chores or quick fixes.
+Needs: A trustworthy way to find reliable help for occasional tasks (e.g., fixing a leaky tap, deep cleaning assistance, assembling furniture). A way to connect with like-minded people in her neighborhood for non-commercial exchange. An avenue to offer her yoga teaching or design skills for simple projects to earn credits.
+Pain Points: Difficulty finding reliable help for small tasks without high costs. Wary of letting strangers into her home from unverified sources. Feels her specific skills could benefit others locally.
+Key User Stories (Illustrative):
+"As Rina, I want to register quickly and securely using my email and a strong password so I can start exploring the platform."
+"As Rina, I want to create a profile that highlights my professional background briefly, my yoga teaching, and graphic design skills, and specify my availability primarily on weekends."
+"As Rina, I want to easily search for someone in my locality (e.g., within a 2km radius or by my Pincode) who offers plumbing repair services."
+"As Rina, I want to be able to view a potential provider's profile, including their skills, bio, and importantly, reviews from other users, before I decide to contact them."
+"As Rina, I want to offer a 1-hour online 'Beginner's Yoga Session' for 1 SphereCredit."
+"As Rina, I want to use the internal messaging system to communicate with a potential service provider to discuss specific details of the task, agree on a suitable time, and confirm any prerequisites before committing to an exchange."
+"As Rina, when I receive a service, I want a simple way to confirm its completion so that the provider receives their earned SphereCredits promptly."
+"As Rina, I want to leave an honest star rating and a short review for the provider after the service is completed to help other users."
+"As Rina, I want to receive timely in-app and email notifications (configurable) when someone expresses interest in a service I offer or sends me a message."
+"As Rina, I want to easily see my current SphereCredit balance and a history of my transactions."
+"As Rina, if I encounter an issue or an uncomfortable interaction, I want a straightforward way to report the user or the content to the platform administrators."
+
+
+
+
+2.2 Persona: Mr. Kumar (Retiree)
+Description: 68-year-old retired government school teacher in Delhi. Lives with his wife. Comfortable with basic smartphone usage (WhatsApp, YouTube) but can find newer or complex apps intimidating. Enjoys gardening, reading, and sharing stories of local history. Needs help with occasional tech troubleshooting, online bill payments, or tasks requiring physical exertion.
+Needs: A simple and accessible platform to get assistance with tasks he finds physically difficult or technically challenging. An opportunity to feel useful and engaged by sharing his knowledge and skills (e.g., tutoring, storytelling). A way to connect with younger people in his community.
+Pain Points: Finds it hard to ask for help for small things. Sometimes feels isolated or that his skills are no longer valued. Worried about online scams or complex interfaces.
+Key User Stories (Illustrative):
+"As Mr. Kumar, I want the registration process to be very simple, with clear instructions in easy-to-understand English, and minimal steps."
+"As Mr. Kumar, I want to be able to list 'Gardening Advice for Beginners' and 'Storytelling (Local Delhi History)' as services I can offer for 1 SphereCredit each."
+"As Mr. Kumar, I want to post a request for someone patient to help me understand how to use a new smart TV's features or set up an online payment for my electricity bill."
+"As Mr. Kumar, I want to clearly see my SphereCredit balance on my main dashboard without having to search for it."
+"As Mr. Kumar, I want service descriptions written by others to be easy to understand, even if they use some technical terms; perhaps a summary would be helpful."
+"As Mr. Kumar, if I have a problem with an exchange, I want a simple way to contact support or report the issue, preferably with an option that doesn't require extensive typing."
+"As Mr. Kumar, I want to feel safe interacting with people on the platform, knowing there are some community guidelines in place."
+"As Mr. Kumar, I'd appreciate if the platform text size is adjustable or generally easy to read."
+
+
+
+
+2.3 Persona: Aisha (Homemaker & Aspiring Entrepreneur)
+Description: 35-year-old homemaker in Hyderabad. Fluent in English and Hindi, understands some Telugu. Excellent cook (specializes in authentic Hyderabadi cuisine), skilled at basic tailoring and embroidery. Manages household finances. Wants to test her skills in a semi-formal setting and build a local network, possibly as a prelude to a small home-based business.
+Needs: An avenue to gain experience and receive feedback on her cooking and tailoring skills without the pressure of a full commercial setup. A way to earn SphereCredits to get help with her children's advanced school projects or learn basic computer skills (e.g., MS Excel) for managing potential future business accounts.
+Pain Points: Lacks a platform to showcase her skills beyond her immediate family and friends. Hesitant about the financial investment and risks of starting a formal business immediately.
+Key User Stories (Illustrative):
+"As Aisha, I want to create detailed service offers for 'Home-cooked Hyderabadi Biryani (serves 4-6)' and 'Custom Saree Blouse Stitching (simple design)'."
+"As Aisha, I want to be able to upload 2-3 photos of my previous culinary creations or tailored items to make my service offers more attractive."
+"As Aisha, I want to clearly state the number of SphereCredits for each service (e.g., 3 SphereCredits for preparing Biryani, estimated 3 hours total work including prep)."
+"As Aisha, I want to receive constructive public reviews that I can later use as testimonials if I decide to start a small business."
+"As Aisha, I want to search for someone in my locality who can provide 'Basic Microsoft Excel Tuition' for 1-2 SphereCredits per hour."
+"As Aisha, I want the messaging system to be reliable so I can discuss dietary preferences or material requirements for my services."
+"As Aisha, I want the platform to feel welcoming and supportive of individuals sharing home-based skills."
+
+
+
+
+2.4 Persona: Admin Dev (Platform Operations)
+Description: 28-year-old tech support specialist, part of the ConnectSphere core operations team. Fluent in English and Hindi. Responsible for overall platform health, user support triage, content moderation, and ensuring a safe and fair environment for users.
+Needs: Efficient and comprehensive tools to manage users, monitor platform activity, handle disputes and reported issues promptly, and uphold community guidelines. Access to basic analytics to understand platform usage patterns.
+Pain Points: Dealing with a high volume of support tickets without adequate tools. Difficulty in quickly identifying and addressing problematic content or users. Lack of clear audit trails for administrative actions.
+Key User Stories (Illustrative):
+"As Admin Dev, I want to access a secure admin panel with role-based permissions."
+"As Admin Dev, I want to be able to view a list of all registered users, search them by username or email, and see their basic profile information and account status (active, suspended, banned)."
+"As Admin Dev, I want to have the ability to suspend or ban users who repeatedly violate platform policies, with a clear record of the reason for the action and the duration."
+"As Admin Dev, I want to efficiently review content (service listings, reviews, user profiles) reported by users, view the reported item, and take appropriate moderation action (e.g., approve, edit with notification, remove, warn user)."
+"As Admin Dev, I want to see an overview dashboard with key platform metrics updated daily (e.g., new user registrations, active listings, completed exchanges, reported items pending review)."
+"As Admin Dev, in case of a clear misunderstanding or platform error in an exchange, I want to be able to manually adjust a user's SphereCredit balance, with a mandatory field to log the reason for this adjustment, which is auditable."
+"As Admin Dev, I want to be able to manage the predefined list of skill categories (add new, edit existing, archive old ones)."
+"As Admin Dev, I want to be able to create and publish platform-wide announcements (e.g., for new features, planned maintenance, or important policy updates)."
+"As Admin Dev, I want to view a history of actions taken by other administrators for accountability."
+
+
+
+
+(Further sections will continue with this level of detail)
+
+3. Functional Requirements
+3.1 User Account Management
+FR-UAM-001 (User Registration): System shall allow new users to register by providing:
+A unique username (alphanumeric, underscores allowed, 5-20 characters, checked for uniqueness in real-time or on submit).
+A valid email address (standard email format validation, checked for uniqueness).
+A strong password (minimum 8 characters, including at least one uppercase letter, one lowercase letter, one number, and one special character. Strength indicator displayed).
+Password confirmation field (must match password).
+Acceptance of Terms of Service and Privacy Policy (checkbox, link to documents).
+
+
+FR-UAM-002 (Email Verification):
+Upon submission of valid registration details, the system shall send an automated email containing a unique verification link to the provided email address.
+The verification link shall expire after a configurable period (e.g., 24 hours).
+User account shall be in a "Pending Verification" state until the email is verified. Users in this state cannot fully access platform features (e.g., cannot create listings or initiate exchanges). They may be able to browse.
+Clicking the verification link shall activate the account and redirect the user to a success page or login page.
+Option to resend verification email if not received or link expired.
+
+
+FR-UAM-003 (User Login):
+Registered and verified users shall be able to log in using their registered username (or email address) and password.
+Implement "Remember Me" functionality (optional checkbox) using secure persistent cookies.
+System shall protect against brute-force login attacks (e.g., rate limiting, CAPTCHA after multiple failed attempts).
+
+
+FR-UAM-004 (Password Reset - "Forgot Password"):
+Users who have forgotten their password shall be able to request a password reset.
+User provides their registered email address.
+If the email exists in the system, a secure, time-limited password reset link is sent to that email.
+Clicking the link directs the user to a page where they can enter and confirm a new password (meeting strength criteria).
+
+
+FR-UAM-005 (User Logout):
+Users shall have a clear option to log out of their account.
+Logout shall invalidate the current session token.
+
+
+FR-UAM-006 (Uniqueness Enforcement): System shall enforce unique usernames and unique email addresses across all active and pending verification accounts. Clear error messages if a chosen username/email is already in use.
+FR-UAM-007 (Error Handling): System shall provide clear, user-friendly error messages for all UAM scenarios (e.g., "Username already taken," "Invalid email format," "Passwords do not match," "Verification link expired," "Invalid login credentials").
+FR-UAM-008 (Voluntary Account Deactivation):
+Users shall have an option in their account settings to permanently deactivate their account.
+Deactivation request requires password re-entry for confirmation.
+Upon deactivation:
+User account is marked as "Deactivated" and login is disabled.
+User's active listings are unpublished.
+User's profile is no longer publicly viewable.
+PII associated with the account will be handled according to the data retention policy and DPDPA (e.g., anonymized or deleted after a grace period or upon explicit request where feasible). Transactional history involving other users (e.g., reviews left/received) may be retained in an anonymized form for platform integrity.
+
+
+
+
+FR-UAM-009 (Session Management):
+Secure session tokens (e.g., JWT) shall be used.
+Sessions shall have an inactivity timeout (e.g., 30 minutes of inactivity prompts re-login or session extension).
+Absolute session timeout (e.g., 24 hours) regardless of activity.
+
+
+
+
+3.2 User Profile Management
+FR-UPM-001 (Profile Creation/Editing Access): Logged-in users shall be able to access a dedicated section to create and edit their personal profile.
+FR-UPM-002 (Profile Fields & Validations):
+First Name: (Required, Text, max 50 characters, alphabetic characters and spaces).
+Last Name: (Optional, Text, max 50 characters, alphabetic characters and spaces).
+Profile Picture: (Optional).
+Upload: JPG, PNG formats accepted.
+Max file size: 2MB.
+System provides basic client-side or server-side image cropping/resizing to a standard aspect ratio (e.g., square).
+Option to remove/delete profile picture.
+Default placeholder image if no picture uploaded.
+
+
+Short Bio: (Optional, Textarea, max 500 characters, plain text or very basic rich text if messaging supports it consistently).
+Primary Location - City/Town: (Required, Text input with autocomplete suggestions for major Indian cities/towns if feasible, or free text, max 100 characters).
+Primary Location - Pincode: (Required, Numeric, 6 digits, validated for Indian Pincode format). This is crucial for local matching. Exact street address is NOT collected for privacy.
+Skills Offered: (Optional but encouraged, Multi-select from a predefined, categorized list of skills managed by Admins. Additionally, allow users to add up to 5 custom skill tags - text, max 30 characters per tag. Max total selected/custom skills e.g., 10).
+Skills/Services Needed (Interests): (Optional, same input mechanism as Skills Offered. Helps in suggesting relevant listings).
+General Availability: (Optional, Selectable options e.g., "Weekdays - Mornings (9am-12pm IST)", "Weekdays - Afternoons (1pm-5pm IST)", "Weekdays - Evenings (6pm-9pm IST)", "Weekends - All Day", "Flexible - Discuss for specifics").
+
+
+FR-UPM-003 (Profile Visibility):
+Publicly viewable elements of a user's profile (by other logged-in users) shall include: Username, First Name (or Full Name if Last Name provided), Profile Picture, Bio, City/Town (Pincode not directly shown on profile, used for search), Skills Offered, average star rating, and public reviews.
+Email address and Pincode are not directly displayed on public profiles.
+
+
+FR-UPM-004 ("View My Profile as Others See It"): Users shall have an option to preview their own profile as it appears to other users.
+FR-UPM-005 (SphereCredit Balance Display): User's current SphereCredit balance shall be prominently displayed on their main dashboard and/or profile summary accessible to them.
+FR-UPM-006 (Transaction History Access): Users shall have access to a chronological list of their SphereCredit transactions. Each entry shall show: Date, Type (Earned/Spent), Amount, Involved User (username, link to their profile), brief description or link to the related Service Listing/Exchange.
+FR-UPM-007 (Profile Completion Prompt): System may gently prompt users with incomplete profiles (e.g., no skills offered, no bio) to complete them to improve their experience and visibility.
+
+
+3.3 Service Listing Management (Offers & Requests)
+FR-SLM-001 (Create Service Offer Access): Logged-in, verified users shall be able to access a form to create a "Service Offer."
+FR-SLM-002 (Service Offer Fields & Validations):
+Title: (Required, Text, max 100 characters, concise and descriptive).
+Description: (Required, Textarea, supports basic rich text formatting – bold, italics, underline, bullet points, numbered lists. Max 2000 characters. Should detail what the service includes, any prerequisites from the requester, what the provider will do).
+Category: (Required, Single select dropdown from a predefined, hierarchical list of service categories managed by Admins, e.g., "Education & Tutoring > Math", "Home & Garden > Minor Repairs").
+Relevant Skill Tags: (Optional, User can select up to 3-5 tags relevant to the offer. Can be from their profile's "Skills Offered" or new custom tags - text, max 30 characters per tag. Aids search).
+Estimated Hours (SphereCredits): (Required, Numeric input, allows decimals e.g., 0.5, 1.0, 1.5, up to a max reasonable limit like 8.0 hours for a single listing. This directly translates to SphereCredits earned by provider/spent by requester). Clear indication: "1 Hour = 1 SphereCredit".
+Service Location Type: (Required, Radio button/Dropdown select: "My Location" (Provider's general area), "Requester's Location" (Requester's general area), "Virtual/Online" (No physical meeting), "Negotiable" (To be discussed)).
+Specific Location Details/Instructions: (Optional, Text, max 300 characters. E.g., "Service offered within 5km of Pincode XXXXXX," "For virtual sessions, a stable internet connection and webcam are needed," "If at my home, please note I have pets"). Users are warned not to share exact private addresses here.
+Availability for this Specific Service: (Optional, Text field or structured input, allows override of general profile availability if this service has unique time constraints).
+Upload Images: (Optional, User can upload up to 3 images. JPG, PNG formats. Max 1MB per image. Images should be relevant to the service offered. Basic client-side preview. Admin moderation capability for images).
+Status: (Default: "Active" upon successful creation. User can later set to "Inactive").
+
+
+FR-SLM-003 (Create Service Request Access): Logged-in, verified users shall be able to access a form to create a "Service Request."
+FR-SLM-004 (Service Request Fields & Validations): Similar structure to Service Offer:
+Title: (Required, Text, max 100 characters).
+Description: (Required, Textarea with basic rich text, max 2000 characters. Should detail what help is needed, any specific requirements or context).
+Category: (Required, Single select from predefined list).
+Relevant Skill Tags Sought: (Optional, up to 3-5 tags for skills needed).
+Estimated Hours You're Willing to Spend (SphereCredits): (Required, Numeric input, indicates the value requester places on the service).
+Service Location Type Preferred: (Required, Radio button/Dropdown select: "My Location," "Provider's Location," "Virtual/Online," "Negotiable").
+Specific Location Details/Context: (Optional, Text, max 300 characters).
+Urgency/Preferred Timeframe: (Optional, Selectable options e.g., "Within 24 hours," "Within this week," "Flexible," "Specific dates if known").
+Status: (Default: "Active").
+
+
+FR-SLM-005 (View "My Listings"): Users shall have a dedicated section in their dashboard to view all Service Offers and Service Requests they have created, filterable by status (Active, Inactive, Pending Completion, Completed, Cancelled).
+FR-SLM-006 (Edit Listings): Users shall be able to edit their own listings as long as they are not part of a currently "Accepted" and "Pending Completion" exchange. All fields editable. Last updated timestamp reflects edit.
+FR-SLM-007 (Delete Listings): Users shall be able to delete their own listings if they are not part of any "Accepted" or "Completed" exchange (to preserve transaction history). Deletion prompts confirmation.
+FR-SLM-008 (Unpublish/Republish Listings): Users shall be able to change the status of their listings between "Active" (visible in search) and "Inactive" (not visible in search, but saved in "My Listings").
+FR-SLM-009 (Timestamps): All listings shall automatically store created_at and updated_at timestamps, visible to the lister and admins.
+FR-SLM-010 (Unique Listing ID): System shall assign a unique, non-sequential identifier to each Service Listing.
+FR-SLM-011 (Draft Mode - Future): Allow users to save listings as drafts before publishing. (Out of scope for V1.0, but good to note).
+FR-SLM-012 (Preview Listing): Before final submission, user should be able to preview how their listing will appear.
+
+
+3.4 Service Discovery & Matching
+FR-SDM-001 (Browse Service Offers): A dedicated section allowing users to browse all "Active" Service Offers. Default sort by "Newest first."
+FR-SDM-002 (Browse Service Requests): A dedicated section allowing users to browse all "Active" Service Requests. Default sort by "Newest first."
+FR-SDM-003 (Global Search Functionality): A prominent search bar shall be available, allowing users to search across both Offers and Requests simultaneously or toggle between them.
+FR-SDM-004 (Search & Filter Options):
+Keyword Search: Searches within Listing Title, Description, and Skill Tags. Supports partial word matching.
+Category Filter: Filter by predefined service categories (multi-select or hierarchical drill-down).
+Location Filter:
+"Near Me": Uses the logged-in user's profile Pincode to find listings within a configurable radius (e.g., 5km, 10km, 25km – admin configurable default, user selectable options). Requires Pincode to lat/long mapping or distance calculation.
+Specific Pincode Search: User can enter a Pincode to see listings relevant to that area.
+City Search: User can select/enter a city.
+
+
+Service Type Filter: Toggle between "Offers Only," "Requests Only," or "Both."
+SphereCredits Filter: Range slider or input fields for min/max SphereCredits (hours).
+Location Type Filter: Filter by "Virtual/Online," "User's Location," "Provider's Location."
+
+
+FR-SDM-005 (Search Results Display):
+Results displayed in a clear, paginated list or card view. Each item in the results shall concisely display:
+Listing Title (clickable, links to detail page).
+Provider/Requester Username (clickable, links to their profile).
+Provider/Requester average star rating.
+Category.
+SphereCredits (Hours).
+Location Type (e.g., "Virtual," "Near [User's City]").
+A short snippet of the description (e.g., first 150 characters).
+Primary image if available.
+Date posted.
+
+
+If no results match, a user-friendly message is displayed with suggestions (e.g., "Try broadening your search criteria").
+
+
+FR-SDM-006 (Sorting Options for Search Results): Users shall be able to sort search results by:
+Newest first (default).
+Oldest first.
+SphereCredits: Low to High.
+SphereCredits: High to Low.
+Relevance (if keyword search is used – basic relevance scoring).
+(Future) Provider/Requester Rating: High to Low.
+
+
+FR-SDM-007 (Service Listing Detail Page):
+Clicking a search result item or a link to a listing shall navigate the user to the full Service Listing detail page.
+This page displays all information from the listing creation form (Title, Full Description, Images, Category, Tags, SphereCredits, Location details, Lister's availability for this service).
+Displays a summary of the Lister's profile: Profile picture, Username, average rating, number of completed exchanges (if available), link to their full profile.
+Clear Call to Action button:
+For Service Offers: "Express Interest & Message [Username]" or "Request This Service."
+For Service Requests: "Offer to Help & Message [Username]."
+
+
+Option to "Report this Listing."
+
+
+FR-SDM-008 (Suggested Listings - Basic): On the user dashboard, system may show a small section of "Suggested Listings" based on user's "Skills Needed" or recently viewed categories (simple algorithm for V1.0).
+
+
+3.5 Service Exchange & SphereCredit Management
+FR-SEM-001 (Initiating Contact - Expressing Interest/Offering Help):
+Clicking the CTA on a Service Offer ("Express Interest") or Service Request ("Offer to Help") initiates the process.
+This action opens the internal messaging interface with a new conversation pre-filled with:
+The other user as recipient.
+A subject line like: "Interest in your offer: [Listing Title]" or "Offer to help with your request: [Listing Title]."
+A link to the relevant Service Listing.
+A default, editable message template (e.g., "Hi [Username], I'm interested in your service offer '[Listing Title]'. Can we discuss the details?").
+
+
+A notification is sent to the recipient.
+
+
+FR-SEM-002 (Discussion & Informal Agreement via Messaging): Users utilize the internal messaging system to discuss details, clarify scope, agree on time, exact location (if physical and not already defined), and any prerequisites. This is an informal agreement stage.
+FR-SEM-003 (Formal Exchange Agreement Proposal):
+Once users informally agree, either the Provider or Requester can initiate a formal "Exchange Agreement" from the conversation thread or the listing page.
+The initiator confirms:
+The specific Service Listing involved.
+The agreed-upon SphereCredits (defaults to listing amount, but can be adjusted if scope changed and both parties agree; system logs original vs. agreed).
+An optional text field for "Agreement Summary" (e.g., "Service to be performed on [Date] at [Time]. Agreed tasks: X, Y, Z.").
+
+
+This proposal is sent to the other party for acceptance.
+
+
+FR-SEM-004 (Exchange Agreement Acceptance):
+The recipient of the proposal receives a notification and can view the proposed agreement details.
+Recipient can "Accept" or "Decline" (with an optional reason for declining, sent as a message).
+If accepted:
+The agreed SphereCredits are provisionally "held" or "earmarked" from the Requester's available balance. The Requester's spendable balance is reduced, but credits are not yet transferred.
+The system shall prevent a Requester from accepting if their current available balance (after considering other held credits) is less than the agreed amount for this exchange. An error message will guide them to earn more credits or negotiate a lower amount. A small negative balance (e.g., -1 or -2 SphereCredits) might be configurable by admins as a platform-wide setting, but generally, exchanges should not proceed if credits are insufficient.
+The status of the exchange becomes "Agreed - Pending Delivery."
+The linked Service Listing's status might be updated (e.g., if it was a single-instance offer, it could be marked as "Pending Completion" and hidden from new searches, or quantity decremented if applicable in future versions).
+Both parties are notified.
+
+
+
+
+FR-SEM-005 (Service Delivery by Provider): After the service has been rendered as agreed, the Provider goes to the "My Exchanges" section and marks the specific exchange as "Service Delivered." This action sends a notification to the Requester.
+FR-SEM-006 (Service Completion Confirmation by Requester):
+The Requester receives a notification and is prompted to confirm that the service was completed satisfactorily.
+The Requester navigates to "My Exchanges" and can "Confirm Service Completion" or "Dispute Service Completion" for the specific exchange.
+
+
+FR-SEM-007 (SphereCredit Transfer & Exchange Completion):
+Upon the Requester clicking "Confirm Service Completion":
+The held SphereCredits are permanently deducted from the Requester's balance.
+The same amount of SphereCredits is added to the Provider's balance.
+The exchange status changes to "Completed."
+Both users are immediately prompted to leave a review for each other for this exchange.
+A record of the transaction is added to both users' transaction histories.
+
+
+
+
+FR-SEM-008 (Handling Non-Confirmation by Requester):
+If a Requester does not confirm or dispute completion within a configurable timeframe (e.g., 72 hours) after the Provider marks "Service Delivered," an automated reminder notification is sent to the Requester.
+If still no response after a further period (e.g., another 48 hours), the exchange may be flagged for admin review. V1.0: Admin manual review. Future: Auto-completion with Provider evidence or more structured dispute process. For V1.0, Provider may need to contact Admin if Requester is unresponsive.
+
+
+FR-SEM-009 (Dispute Initiation):
+If the Requester selects "Dispute Service Completion," they are prompted to provide a reason for the dispute (text field).
+The exchange status changes to "Disputed."
+Both parties are notified.
+The disputed exchange is flagged in the Admin panel for review and mediation. SphereCredits remain on hold.
+Admins will review messages, listing details, and may contact both parties to mediate. Admin can then manually resolve (e.g., full credit transfer, partial transfer, no transfer, credit refund to requester). All admin actions are audited.
+
+
+FR-SEM-010 (Cancellation of Exchange Agreement):
+Before the Provider marks "Service Delivered," either party can request to cancel an "Agreed - Pending Delivery" exchange.
+The other party must confirm the cancellation.
+Upon mutual cancellation, any held SphereCredits are returned to the Requester's available balance. The exchange status becomes "Cancelled."
+If one party requests cancellation and the other does not respond/agree, it may be flagged for admin review after a period.
+
+
+FR-SEM-011 (SphereCredit Balance & History):
+Users shall always see their current "Available Balance" and "Total Balance" (if held credits are shown separately).
+Transaction History page shall be detailed: Date/Time, Type (Earned/Spent/Correction/Seed), Amount (+/-), Counterparty User (link to profile), Brief Description (e.g., "Service: [Listing Title]", "Admin Correction", "Initial Seed Credits"), Resulting Balance. Sortable and filterable by date range.
+
+
+FR-SEM-012 (Initial Seed Credits): New, verified users shall automatically receive a configurable amount of SphereCredits (e.g., 2.0 SphereCredits) upon first login after verification. This is logged in their transaction history.
+FR-SEM-013 (No Negative Balance Default): System default prevents users from having a negative SphereCredit balance. Attempts to spend more than available (including held credits) will be blocked with an informative message. Exception: Admin-configurable small overdraft limit (e.g., -1 credit) for flexibility, if deemed necessary.
+
+
+3.6 Communication & Notifications
+FR-CN-001 (Internal Messaging System):
+A secure, private, one-to-one messaging system shall be available between registered users.
+Access via a dedicated "Messages" or "Inbox" section.
+Conversations are threaded by user pairs, or potentially by user pair + specific listing/exchange context if needed for clarity.
+Supports text messages (UTF-8 for multilingual input by users).
+Supports standard emojis (using a built-in emoji picker).
+Strictly no file attachments in V1.0 to minimize security risks and moderation overhead.
+Messages should have timestamps (e.g., "HH:MM DD-Mon-YYYY").
+Indication of "new unread messages" per conversation and globally.
+
+
+FR-CN-002 (New Unread Message Indicators):
+A visual indicator (e.g., a badge with a count) on the main navigation "Messages" link.
+Within the Inbox, unread conversations are visually distinct (e.g., bolded).
+(Optional for V1.0, desirable) Real-time update of unread counts without page reload (e.g., using polling or WebSockets if feasible).
+
+
+FR-CN-003 (Message Read Status - Future): Consideration for "Sent," "Delivered," "Read" indicators (like WhatsApp) for future versions. (Out of scope for V1.0 due to complexity).
+FR-CN-004 (In-Platform Notifications Center):
+A dedicated notifications area (e.g., bell icon) displaying a chronological list of platform-generated notifications relevant to the user.
+Notifications are dismissible or marked as read.
+Each notification should be concise and, where applicable, link to the relevant page/item (e.g., a message, a listing, an exchange).
+
+
+FR-CN-005 (Types of In-Platform Notifications):
+Messages: "You have a new message from [Username]."
+Listings: "[Username] expressed interest in your offer: [Listing Title]." / "[Username] offered to help with your request: [Listing Title]."
+Exchanges:
+"[Username] has proposed an Exchange Agreement for [Listing Title]."
+"Your Exchange Agreement for [Listing Title] with [Username] has been accepted."
+"[Username] has marked service as delivered for exchange: [Listing Title]."
+"Reminder: Please confirm service completion for exchange with [Username]: [Listing Title]."
+"Service completion confirmed for exchange with [Username]: [Listing Title]." (Notification to provider)
+"Exchange for [Listing Title] has been disputed by [Username]."
+"Exchange for [Listing Title] has been cancelled."
+
+
+SphereCredits: "You have received [X] SphereCredits from [Username] for [Listing Title]." / "You have spent [X] SphereCredits for [Listing Title] with [Username]."
+Reviews: "You have received a new review from [Username]." / "Reminder: Please leave a review for [Username] for exchange: [Listing Title]."
+Admin/System: "Your reported content ([Item]) has been reviewed." / "Platform Announcement: [Title]." / "Your account has been [warned/suspended] due to [reason]."
+
+
+FR-CN-006 (Email Notifications):
+Users shall receive email notifications for critical events, configurable in their account settings.
+Email notification categories for V1.0:
+New private message (can be batched into a digest e.g., "You have X new messages").
+Exchange Agreement proposed/accepted/updated.
+Service marked delivered / Reminder to confirm completion.
+Critical account notifications (e.g., password reset, security alerts, suspension).
+
+
+Users can choose frequency: "Instantly," "Daily Digest," "Never" for non-critical emails. Critical account emails are non-optional.
+All emails must be professionally formatted, clearly branded as ConnectSphere, include a direct link to the relevant item on the platform (if applicable), and have an unsubscribe link for marketing/digest emails (not for transactional/security emails).
+
+
+FR-CN-007 (Notification Content): All system-generated messages, in-platform notifications, and emails shall be clear, concise, grammatically correct (English V1.0), and provide necessary context. Avoid jargon.
+FR-CN-008 (User Control over Notifications): User settings page to manage email notification preferences per category (as defined in FR-CN-006). In-platform notifications are generally on, but future versions could allow some finer control.
+
+
+3.7 Trust, Safety & Reviews
+FR-TSR-001 (Review System Initiation): After an exchange status changes to "Completed" (i.e., Requester confirms service completion), both the Provider and Requester are prompted (via in-platform notification and UI element on the exchange detail page) to leave a review for the other party.
+FR-TSR-002 (Review Components): A review shall consist of:
+Star Rating: A mandatory 1 to 5-star rating (e.g., 1=Very Poor, 2=Poor, 3=Average, 4=Good, 5=Excellent). Clear visual representation.
+Public Comment: An optional text field for a public comment (max 500 characters, plain text). Users guided to be constructive and respectful.
+(Internal/Future) Private Feedback to Platform: Optional field for private feedback to admins about the exchange if desired (not visible to other user). (Out of scope for V1.0).
+
+
+FR-TSR-003 (Double-Blind Review Process):
+Reviews are submitted "double-blind." Neither user sees the other's review for that specific exchange until both have submitted their review OR a review window expires.
+Review Window: A configurable period (e.g., 7 or 14 days) after exchange completion within which reviews can be submitted.
+If User A submits a review, User B is notified that User A has left a review and is encouraged to submit theirs. User A's review remains hidden from User B.
+Once User B also submits, both reviews become public simultaneously.
+If only one user submits a review by the end of the window, that single review becomes public.
+
+
+FR-TSR-004 (Review Display):
+A user's average star rating (calculated from all received ratings) is prominently displayed on their profile and on service listing summaries.
+Individual public reviews (star rating, comment, reviewer's username, date of review, and link to the service listing for context if appropriate and privacy-preserving) are listed chronologically on the user's profile page.
+Users cannot delete reviews they have received. They can report a review if they believe it violates community guidelines (see FR-TSR-008).
+Users can edit their own submitted review for a short period (e.g., 24 hours) after submission, provided the other party hasn't submitted theirs yet or the review hasn't become public.
+
+
+FR-TSR-005 (Reporting Mechanism): Users shall be able to report:
+User Profiles: For impersonation, fake profiles, offensive content, etc.
+Service Listings (Offers/Requests): For prohibited services, misleading information, spam, offensive content.
+Private Messages: For harassment, spam, inappropriate proposals (mechanism to select specific messages in a conversation).
+Public Reviews: For abusive language, personal attacks, off-topic rants, clear falsehoods (not just disagreement).
+(General) User Behavior: If an exchange went poorly due to behavior not covered by other reports (e.g., consistent no-shows, aggressive behavior offline discussed online).
+
+
+FR-TSR-006 (Reporting Process):
+The "Report" button/link is contextually available next to the item being reported.
+User selects a predefined reason for the report from a dropdown list (e.g., "Spam," "Harassment," "Misleading Content," "Safety Concern," "Prohibited Service," "Offensive Language").
+User can (and is encouraged to) provide a brief textual description (max 500 characters) detailing why they are reporting.
+Submission of a report flags the item/user in the Admin panel for review.
+The reporting user receives an acknowledgement: "Your report has been submitted for review." Further status updates may be provided (e.g., "Action taken on your report").
+
+
+FR-TSR-007 (Community Guidelines & Terms of Service):
+ConnectSphere shall provide comprehensive, easily accessible (e.g., footer links, dedicated help section) Community Guidelines and Terms of Service (ToS).
+Community Guidelines: Outline expected user behavior, principles of respect and fairness, safety tips for online and offline interactions, examples of prohibited services/content (e.g., illegal activities, hate speech, discrimination, weapons, adult services, monetary exchange requests), and consequences of violations. (See Appendix 13.1 for outline).
+Terms of Service: Legal agreement covering user responsibilities, platform liability limitations, intellectual property, account termination, dispute resolution (platform as facilitator, not guarantor of services), governing law (India). (See Appendix 13.3 for outline).
+Users must agree to ToS and acknowledge Community Guidelines during registration. Updates to these documents require user notification.
+
+
+FR-TSR-008 (Admin Moderation of Reported Content): (Detailed in Admin Panel section FR-ADM-003). Admins review reported items and take appropriate action (dismiss, warn, edit, remove content, suspend/ban user).
+FR-TSR-009 (User Blocking Functionality):
+A user (User A) shall be able to "Block" another user (User B).
+When User A blocks User B:
+User B can no longer view User A's profile or Service Listings.
+User B cannot send new messages to User A (existing conversations may become read-only or hidden from User B's view for new messages from A).
+User A will not see User B's listings in search results (optional, configurable).
+User B is NOT notified that they have been blocked.
+
+
+User A can manage their list of blocked users and unblock them if desired.
+
+
+FR-TSR-010 (Privacy Policy): A clear, DPDPA-compliant Privacy Policy detailing data collection, usage, storage, sharing, user rights, and security measures. (See Appendix 13.2 for outline).
+FR-TSR-011 (Safety Tips & Resources): A dedicated section or help page with practical safety tips for users when arranging offline meetups for service exchange (e.g., meet in public places for first time, inform a friend, trust instincts, don't share overly personal info too soon).
+
+
+3.8 Administration Panel
+FR-ADM-001 (Secure Access & Role-Based Permissions):
+Admin panel accessible via a separate, secure login URL.
+Requires strong admin credentials (username/password, 2FA highly recommended for future).
+Support for different admin roles (e.g., Super Admin, Moderator, Support Agent) with granular permissions for accessing different modules and performing actions. (V1.0 may start with Super Admin and Moderator roles).
+
+
+FR-ADM-002 (User Management Module):
+View Users: List all registered users with pagination. Display key info: User ID, Username, Email, First Name, Last Name, Registration Date, Last Login Date, Current SphereCredit Balance, Account Status (Active, Suspended, Banned, Pending Verification).
+Search & Filter Users: Search by User ID, Username, Email. Filter by Account Status, Registration Date Range.
+View User Details: Clicking a user opens a detailed view: full profile information, all listings created by the user, complete exchange history, transaction history, moderation history (warnings, suspensions), notes added by admins.
+Account Actions:
+Verify Email Manually: If needed (e.g., user reports verification email issue).
+Suspend Account: Temporarily disable login and hide user's listings. Specify suspension duration (e.g., 7 days, 30 days, indefinite until review) and reason (logged). User notified.
+Unsuspend Account: Reactivate a suspended account.
+Ban Account: Permanently disable login, hide listings, and potentially block email/IP (if severe violation). Reason logged. User notified.
+Edit Basic User Info: Admins can (with caution and audit trail) edit certain user fields like name or city if requested by user and verified, or to correct obvious errors. Email/Username changes should be highly restricted.
+Reset User Password (Admin Initiated): Send a password reset link to the user's email.
+View User Login History: IP addresses, timestamps (for security investigations).
+
+
+
+
+FR-ADM-003 (Content Moderation Module):
+Reported Content Queue: A centralized queue displaying all items (Profiles, Listings, Reviews, Messages if message reporting is deep) reported by users. Sortable by date reported, type of item, reporter.
+Review Reported Item: Admin can view the reported item in context, who reported it, and the reason/description provided.
+Moderation Actions on Content:
+Approve (Dismiss Report): If the content is deemed compliant. Report closed.
+Edit Content: For minor violations, admin can edit the content (e.g., remove an offensive word from a listing) and notify the user of the change.
+Remove Content: Delete the offending listing, review, or profile picture. User notified with reason.
+Warn User: Send a formal warning to the user regarding the content violation. Logged against user profile.
+
+
+Service Listing Management: Admins can search, view, edit, unpublish, or delete any service listing on the platform.
+Review Management: Admins can hide/remove reviews that violate guidelines (after investigation).
+
+
+FR-ADM-004 (Exchange Management & Dispute Resolution Module):
+View Exchanges: List all exchanges with filters (status: proposed, agreed, pending delivery, disputed, completed, cancelled), users involved, dates.
+View Exchange Details: Full history of an exchange, including linked listing, agreed terms, messages between users (if necessary for dispute resolution and with privacy considerations).
+Handle Disputed Exchanges:
+Disputed exchanges are flagged prominently.
+Admin can add internal notes, track communication with involved parties.
+Admin can manually resolve a dispute by:
+Awarding full SphereCredits to Provider.
+Refunding full SphereCredits to Requester (if held).
+Awarding partial SphereCredits (e.g., if partial service was rendered).
+Cancelling the exchange with no credit transfer.
+
+
+All resolution actions and reasons are logged.
+
+
+Manual SphereCredit Adjustment: Admins (typically Super Admin role) can manually add or deduct SphereCredits from a user's account. This requires a mandatory, detailed reason for the adjustment, which is logged in an immutable audit trail and visible in user's transaction history (e.g., "Admin Correction: Resolved Dispute #123"). Use with extreme caution.
+
+
+FR-ADM-005 (Platform Configuration Module):
+Manage Skill Categories: CRUD operations for the predefined list of service categories and subcategories.
+Set System Parameters: Configure platform-wide settings like:
+Initial SphereCredit seed amount for new users.
+Review submission window duration.
+Session timeout values.
+Max number of images per listing, max file sizes.
+Configurable text for certain system emails or messages.
+
+
+Platform Announcements: Create and publish announcements visible to all users on their dashboard or via a notification. Can specify start/end dates for display.
+
+
+FR-ADM-006 (Basic Analytics & Reporting Dashboard):
+Dashboard displaying key platform metrics with date range selectors:
+Total Registered Users, New Users (daily/weekly/monthly).
+Daily Active Users (DAU), Monthly Active Users (MAU).
+Number of Active Service Offers, Active Service Requests.
+Number of Completed Exchanges (daily/weekly/monthly).
+Total SphereCredits in Circulation.
+Number of Reported Items (total, pending, resolved).
+Most popular service categories.
+
+
+Option to export basic reports (e.g., user list, listing list) in CSV format.
+
+
+FR-ADM-007 (Admin User Management - Super Admin Only):
+Create new admin accounts.
+Assign/modify admin roles and permissions.
+Suspend/Deactivate admin accounts.
+Reset admin passwords.
+
+
+FR-ADM-008 (Audit Logging): All significant actions performed by administrators within the admin panel (e.g., user suspension, content removal, credit adjustment, config changes) shall be logged with: Admin User ID, Timestamp, Action Type, Target Entity ID (e.g., User ID, Listing ID), IP Address, and Details/Reason. Logs should be immutable or highly tamper-resistant.
+
+
+3.9 Localization & Language Support
+FR-LLS-001 (Default UI Language - V1.0): The platform User Interface (all menus, buttons, labels, system-generated messages, help text) shall be exclusively in English for the V1.0 release.
+FR-LLS-002 (User-Generated Content Language - V1.0):
+Users can create content (profile bios, service descriptions, messages, reviews) in any language they choose.
+The system backend and database must fully support UTF-8 encoding to correctly store and display multilingual characters.
+It is anticipated that users in India will primarily use English, Hinglish (Romanized Hindi/English mix), or other Romanized Indian languages in free-text fields. No explicit translation services provided by platform in V1.0.
+
+
+FR-LLS-003 (Architecture for Future Localization):
+The frontend and backend architecture must be designed to support full UI localization into multiple languages in future releases.
+This includes externalizing all UI text strings into resource files/lookup tables rather than hardcoding them.
+Date, time, and number formats should be handled in a way that allows for future locale-specific rendering (though V1.0 will use common Indian/English standards).
+
+
+FR-LLS-004 (Date/Time Display - V1.0):
+Dates will be displayed in a clear, common format (e.g., "DD-Mon-YYYY" like "29-May-2025").
+Times will be displayed in 12-hour format with AM/PM (e.g., "02:30 PM IST").
+The platform will operate primarily on Indian Standard Time (IST). Timestamps stored in UTC in the backend and converted to IST for display.
+
+
+FR-LLS-005 (Admin Panel Language - V1.0): The Admin Panel UI will also be in English for V1.0. Admin users are expected to be proficient in English.
+4. Non-Functional Requirements
+4.1 Performance
+NFR-PER-001 (Page Load Time):
+Average page load time for key pages (Dashboard, Search Results, Listing Detail) shall be under 3 seconds on a typical Indian urban broadband connection (e.g., >10 Mbps) and under 5 seconds on a 4G mobile connection.
+PWA initial load (after installation/caching) should be under 3 seconds. Subsequent loads under 2 seconds.
+
+
+NFR-PER-002 (API Response Time): 95th percentile API response time for core backend operations shall be under 500 milliseconds (excluding network latency).
+NFR-PER-003 (Search Performance): Search results for typical queries (keyword, category, location) shall be returned within 2-3 seconds.
+NFR-PER-004 (Concurrent Users): The system shall support at least 1,000 concurrent active users in V1.0 without significant performance degradation, with architecture designed to scale to 10,000+ concurrent users.
+NFR-PER-005 (Resource Optimization): Frontend assets (JS, CSS, images) shall be optimized (minified, compressed, lazy-loaded where appropriate) to reduce bandwidth consumption, critical for Indian mobile users with potentially limited data plans.
+NFR-PER-006 (Database Performance): Database queries shall be optimized with appropriate indexing to ensure fast data retrieval. No single query for user-facing pages should take longer than 200ms on average.
+
+
+4.2 Scalability
+NFR-SCL-001 (Horizontal Scalability): The application architecture (both frontend and backend) shall support horizontal scaling. This means adding more server instances to handle increased load, rather than just upgrading a single server.
+NFR-SCL-002 (Stateless Application Tier): Backend application servers should be stateless to facilitate load balancing and easy scaling. Session state, if any, should be managed externally (e.g., Redis, database).
+NFR-SCL-003 (Database Scalability): Database design should allow for read replicas to offload read traffic. Consider sharding strategies for future massive scale, though not required for V1.0.
+NFR-SCL-004 (Asynchronous Processing): Long-running or non-critical tasks (e.g., sending bulk email notifications, complex report generation for admins) should be handled asynchronously using a message queue system (e.g., RabbitMQ, SQS) to avoid blocking user-facing requests.
+NFR-SCL-005 (CDN Usage): A Content Delivery Network (CDN) with Points of Presence (PoPs) in India shall be used to serve static assets (images, JS, CSS) to reduce latency and offload origin servers.
+
+
+4.3 Availability & Reliability
+NFR-AVR-001 (Uptime): The platform shall achieve an uptime of at least 99.5% per month, excluding scheduled maintenance.
+NFR-AVR-002 (Scheduled Maintenance): Scheduled maintenance windows shall be minimized, planned for off-peak hours (e.g., late night IST), and communicated to users at least 24-48 hours in advance via platform announcements and/or email.
+NFR-AVR-003 (Data Backup & Recovery):
+Automated daily backups of the primary database.
+Backups stored securely in a separate geographical location (within India if data sovereignty requires).
+Recovery Point Objective (RPO): Maximum 24 hours of data loss in case of catastrophic failure.
+Recovery Time Objective (RTO): System restored to operational state within 4 hours of a major incident.
+Regular testing of backup and recovery procedures (e.g., quarterly).
+
+
+NFR-AVR-004 (Fault Tolerance): Critical components of the system (e.g., application servers, database) should have redundancy or failover mechanisms to minimize downtime (e.g., load balancers distributing traffic across multiple app instances, database with failover replica).
+NFR-AVR-005 (Error Handling & Logging): Robust error handling throughout the application. All critical errors and exceptions (both frontend and backend) shall be logged centrally with sufficient context for diagnosis and debugging (e.g., using Sentry, ELK stack). User-facing error messages should be friendly and informative, not exposing technical details.
+
+
+4.4 Security
+NFR-SEC-001 (Data Transmission): All communication between client (browser) and server, and between internal services, shall be encrypted using current, strong TLS protocols (HTTPS enforced everywhere).
+NFR-SEC-002 (Password Security): User passwords shall be hashed using a strong, adaptive hashing algorithm (e.g., bcrypt or scrypt with appropriate work factor) and salted. Plain text passwords must never be stored.
+NFR-SEC-003 (Protection against Common Vulnerabilities): The platform shall be protected against common web vulnerabilities as defined by OWASP Top 10, including but not limited to:
+SQL Injection (use of parameterized queries/ORMs).
+Cross-Site Scripting (XSS) (proper output encoding, Content Security Policy - CSP).
+Cross-Site Request Forgery (CSRF) (use of anti-CSRF tokens for state-changing requests).
+Insecure Direct Object References (IDOR) / Broken Access Control (rigorous authorization checks on all endpoints).
+Security Misconfiguration (hardened server configurations, removal of default credentials, regular patching).
+Sensitive Data Exposure (encryption at rest for highly sensitive PII where appropriate, beyond DPDPA requirements if a high risk is identified).
+
+
+NFR-SEC-004 (Authentication & Authorization): Secure mechanisms for user authentication (session tokens, JWTs with appropriate claims and expiry). Robust authorization checks at the API level for every request to ensure users can only access data and perform actions they are permitted to.
+NFR-SEC-005 (Input Validation): Strict input validation on both client-side (for UX) and server-side (for security) for all user-supplied data to prevent injection attacks and ensure data integrity.
+NFR-SEC-006 (Rate Limiting): Implement rate limiting on sensitive endpoints (e.g., login, registration, password reset, API requests) to mitigate DoS attacks and abuse.
+NFR-SEC-007 (Admin Panel Security): Admin panel access restricted by IP whitelisting if feasible, strong authentication (2FA highly recommended future), and separate secure URL.
+NFR-SEC-008 (Third-Party Library Security): Regularly scan and update third-party libraries and dependencies for known vulnerabilities.
+NFR-SEC-009 (Data Privacy - DPDPA Compliance): Adherence to India's Digital Personal Data Protection Act (DPDPA) regarding consent, data minimization, purpose limitation, data storage, user rights (access, correction, erasure), and breach notification. (See Appendix 13.2).
+NFR-SEC-010 (Regular Security Audits): Plan for periodic independent security assessments/penetration testing post-launch and after major feature releases.
+NFR-SEC-011 (HTTP Security Headers): Implement appropriate HTTP security headers like Content Security Policy (CSP), Strict-Transport-Security (HSTS), X-Content-Type-Options, X-Frame-Options, Referrer-Policy.
+
+
+4.5 Usability & User Experience (UX/UI)
+NFR-UX-001 (Intuitive Navigation): The platform shall have a clear, consistent, and intuitive navigation structure. Users should be able to find key features and information easily (e.g., within 3 clicks for common tasks).
+NFR-UX-002 (Mobile-First & Responsive Design): The UI shall be designed mobile-first and be fully responsive, providing an optimal viewing and interaction experience across a wide range of devices (smartphones, tablets, desktops).
+NFR-UX-003 (Progressive Web App - PWA): The web application shall be developed as a PWA, offering features like:
+Installability to user's home screen.
+Offline access to cached static content and potentially some core data (e.g., previously viewed listings, ongoing conversations).
+Push notifications (for future integration if desired, though V1.0 focuses on email/in-app).
+
+
+NFR-UX-004 (Clarity & Simplicity): UI elements, labels, and content shall use clear, simple language (English for V1.0, easily understandable by a broad Indian audience). Avoid jargon and overly complex layouts. Prioritize scannability.
+NFR-UX-005 (Consistency): UI elements, terminology, and interaction patterns shall be consistent throughout the platform.
+NFR-UX-006 (Feedback & Error Prevention):
+The system shall provide immediate feedback for user actions (e.g., loading indicators, success messages, confirmation dialogs).
+Design to prevent errors where possible (e.g., clear input constraints, disabling buttons until required fields are filled).
+User-friendly error messages that explain the problem and suggest solutions, not just error codes.
+
+
+NFR-UX-007 (Onboarding & Guidance):
+Simple and guided onboarding process for new users.
+Tooltips or contextual help for less obvious features.
+An easily accessible FAQ section covering common questions.
+
+
+NFR-UX-008 (Visual Appeal): The platform should have a clean, modern, and trustworthy visual design that is appealing to the target Indian audience (culturally sensitive, but not stereotypical).
+NFR-UX-009 (User Control & Freedom): Users should be able to easily undo actions where appropriate (e.g., cancelling a listing creation before final submit) and navigate back without losing context. Clear exit paths from forms or modals.
+NFR-UX-010 (Browser Compatibility): Support for the latest two versions of major web browsers: Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge.
+
+
+4.6 Maintainability & Testability
+NFR-MNT-001 (Modular Code): Codebase (both frontend and backend) shall be modular, well-organized, and follow established design patterns to facilitate understanding, modification, and extension.
+NFR-MNT-002 (Coding Standards): Adherence to consistent coding standards and best practices for the chosen programming languages and frameworks. Use of linters and code formatters.
+NFR-MNT-003 (Code Documentation): Sufficient in-code comments for complex logic. API endpoints well-documented (e.g., using Swagger/OpenAPI for backend APIs).
+NFR-MNT-004 (Version Control): All code and configuration managed under a version control system (e.g., Git) with a clear branching strategy (e.g., GitFlow).
+NFR-MNT-005 (Automated Testing):
+Unit tests for critical backend logic and components, aiming for >70% code coverage.
+Integration tests for API endpoints and key service interactions.
+(Future) End-to-end UI automation tests for critical user flows.
+
+
+NFR-MNT-006 (CI/CD Pipeline): Implementation of a Continuous Integration/Continuous Deployment (CI/CD) pipeline to automate building, testing, and deploying application updates.
+NFR-MNT-007 (Configuration Management): Application configuration (e.g., database credentials, API keys, feature flags) managed externally from the codebase (e.g., environment variables, configuration service).
+NFR-MNT-008 (Logging Framework): Consistent use of a logging framework for application events, errors, and debug information.
+
+
+4.7 Data Management & Compliance
+NFR-DMC-001 (DPDPA Compliance): Full compliance with India's Digital Personal Data Protection Act, 2023. This includes:
+Lawful, fair, and transparent processing of personal data.
+Purpose limitation: Data collected only for specified, explicit, and legitimate purposes.
+Data minimization: Collect only necessary personal data.
+Accuracy: Reasonable steps to ensure personal data is accurate and up-to-date.
+Storage limitation: Personal data kept no longer than necessary for the purposes for which it was processed.
+Integrity and confidentiality: Appropriate security measures to protect personal data.
+Accountability: Mechanisms to demonstrate compliance.
+User Rights: Processes to facilitate user rights (access, correction, erasure, grievance redressal).
+Consent: Obtain clear, informed, and specific consent for processing personal data. Mechanism for consent withdrawal.
+Breach Notification: Procedures for notifying authorities and affected users in case of a data breach.
+
+
+NFR-DMC-002 (Data Retention Policy): A clear data retention policy defining how long different types of user data are stored, especially after account deactivation, aligned with DPDPA and business needs.
+NFR-DMC-003 (Data Privacy by Design & Default): Privacy considerations embedded into the design and development process of all features. Default settings should be privacy-protective.
+NFR-DMC-004 (Audit Trails for Sensitive Data Access): Logging of access to sensitive PII by administrators.
+
+
+4.8 Accessibility
+NFR-ACC-001 (WCAG Compliance): The platform shall strive to meet Web Content Accessibility Guidelines (WCAG) 2.1 Level A as a minimum, with a goal of achieving Level AA compliance for key user flows and content.
+NFR-ACC-002 (Keyboard Navigation): All interactive elements shall be navigable and operable using a keyboard alone. Clear focus indicators.
+NFR-ACC-003 (Screen Reader Compatibility): Content shall be structured semantically (correct use of HTML5 elements, ARIA attributes where necessary) to be compatible with common screen readers.
+NFR-ACC-004 (Text Alternatives for Non-Text Content): Images that convey information shall have appropriate alt text. Decorative images should have null alt attributes.
+NFR-ACC-005 (Color Contrast): Sufficient color contrast between text and background to ensure readability for users with low vision (meeting WCAG AA contrast ratios).
+NFR-ACC-006 (Resizable Text): Users should be able to resize text up to 200% without loss of content or functionality.
+NFR-ACC-007 (Understandable Content): Clear and simple language. Consistent navigation and layout. Forms with clear labels and instructions.
+
+
+
+5. Design & User Experience (UX) Specifications
+5.1 Design Philosophy & Principles:
+Community-Centric: Design to foster connection, trust, and mutual support.
+Simplicity & Clarity: Easy to understand and use, even for users with moderate digital literacy. Avoid clutter.
+Trustworthy & Secure: Visual cues and flows that inspire confidence in the platform's safety and reliability.
+Empowering: Enable users to easily offer their skills and find help, feeling valued.
+Inclusive & Accessible: Cater to a diverse user base in India.
+Efficient: Allow users to accomplish their goals quickly and with minimal friction.
+
+
+5.2 Branding & Visual Identity (Conceptual):
+Platform Name: ConnectSphere TimeBank (ConnectSphere for short).
+Logo: (To be designed) Should evoke connection, community, time, and value. Modern, clean, and memorable.
+Color Palette: (To be designed) Likely warm, inviting, and trustworthy colors. Consider colors with positive associations in Indian culture, while maintaining a professional and modern feel. Ensure high contrast for accessibility.
+Typography: (To be selected) Clean, legible sans-serif fonts suitable for web and mobile. Good readability in English. Support for Devanagari script for user-generated content if future localization is considered.
+Imagery/Iconography: (To be designed/selected) Icons should be intuitive and universally understood. Imagery (if used) should reflect diverse Indian communities positively and authentically. Avoid stereotypes.
+
+
+5.3 Information Architecture & Navigation (Refined):
+A. Public (Logged-Out) Area:
+Homepage: Hero section explaining ConnectSphere, value proposition, how it works, testimonials (future), CTAs to Register/Login.
+About Us: Mission, vision, team (optional).
+How It Works: Detailed explanation of timebanking, SphereCredits, exchange process.
+Community Guidelines: Link to full guidelines.
+FAQ: Answers to common questions.
+Contact Us: Support information/form.
+Login Page.
+Registration Page.
+Terms of Service & Privacy Policy (footer links).
+
+
+B. Authenticated (Logged-In) User Area - Main Navigation (Persistent Header/Sidebar):
+Logo/Home (Dashboard): Links to user's main dashboard.
+Browse Services: (Search/filter Offers & Requests).
+My Listings: (Manage user's own Offers & Requests).
+Sub-menu: View Offers, View Requests, Create New Listing.
+
+
+My Exchanges: (Track ongoing, pending, completed, disputed exchanges).
+Messages: (Access to internal messaging inbox).
+Notifications: (Bell icon with count, links to notifications panel/page).
+User Profile Dropdown (Top Right):
+View My Profile
+Edit Profile
+Account Settings (Password, Email, Notification Preferences, Deactivate Account)
+SphereCredit Balance & History
+Help/FAQ
+Logout
+
+
+
+
+C. Footer (Persistent):
+About Us, How It Works, Community Guidelines, Terms of Service, Privacy Policy, Contact Us, © [Year] ConnectSphere.
+
+
+
+
+5.4 Key User Flows (Detailed Descriptions - Wireframes/Mockups to visualize these):
+User Registration Flow: Landing Page CTA -> Registration Form (Username, Email, Password, Confirm Pass, ToS/PP Checkbox) -> Submit -> Email Verification Sent Page -> User checks email, clicks link -> Verification Success Page / Auto-Login to Dashboard.
+User Login Flow: Login Page (Username/Email, Password, "Forgot Password?" link) -> Submit -> Dashboard (on success) / Error message (on failure).
+Create Service Offer Flow: My Listings/Dashboard CTA -> Create Listing Form (select "Offer") -> Fill all required fields (Title, Desc, Category, Hours, Location etc.) -> Upload Images (optional) -> Preview Offer -> Submit Offer -> Success Message / Offer appears in "My Listings" and public search.
+Browse & Find Service Flow: Browse Services Page / Use Search Bar -> Apply Filters (Location, Category etc.) -> View Search Results (List/Card view) -> Click on a Listing -> View Listing Detail Page.
+Initiate Exchange Flow (User A wants service from User B's Offer): User A on User B's Service Offer Detail Page -> Click "Express Interest & Message" -> Opens Message composer pre-filled -> User A sends message -> User B receives message/notification -> Users discuss via messages -> Either user initiates "Propose Exchange Agreement" from message or listing -> Fill agreement details (confirm credits, summary) -> Send Proposal -> Other user receives proposal -> Accepts/Declines.
+Complete Exchange & Review Flow: (After service rendered offline/online) Provider marks "Service Delivered" in My Exchanges -> Requester receives notification -> Requester "Confirms Service Completion" in My Exchanges -> SphereCredits transferred -> Both users prompted to "Leave a Review" -> Review form (Stars, Comment) -> Submit Review (double-blind logic applies) -> Review appears on profile after conditions met.
+Report Content/User Flow: User sees inappropriate item -> Clicks "Report" -> Select Reason, Add Description -> Submit -> Confirmation message -> Report appears in Admin Queue.
+
+
+5.5 UI Component Guidelines (Conceptual - To be detailed in Style Guide):
+Buttons: Primary CTA, Secondary, Tertiary, Destructive (e.g., Delete). Clear states: default, hover, active, disabled.
+Forms: Clearly labeled fields, input validation messages, appropriate input types (text, email, password, number, textarea, select, radio, checkbox).
+Cards: Used for displaying listings in search results, profile summaries. Consistent structure.
+Modals/Dialogs: For confirmations, alerts, short forms. Clear close mechanism.
+Navigation Elements: Header, footer, sidebars (if any), breadcrumbs.
+Tables: For displaying lists of data (e.g., transaction history, admin user lists). Sortable columns.
+Icons: Consistent style, easily recognizable.
+Loading Indicators: Spinners, progress bars for asynchronous actions.
+
+
+5.6 Content Strategy & Tone of Voice:
+Tone: Friendly, supportive, trustworthy, clear, concise, respectful. Avoid overly casual or technical language.
+Language: English (for V1.0 UI). User-generated content can be multilingual. All system text should be professional and grammatically correct.
+Help Content: FAQs, "How It Works," Community Guidelines should be easy to find and understand. Use simple terms and step-by-step instructions where needed.
+
+
+5.7 Wireframes/Mockups: (Placeholder) This section would typically contain links to or embedded low-fidelity wireframes for all key screens and user flows, followed by high-fidelity mockups based on the agreed visual identity. This is a critical deliverable from the Design Team.
+5.8 Style Guide: (Placeholder) This section would link to a comprehensive Style Guide document created by the Design Team, detailing: Color Palette (hex codes), Typography (fonts, sizes, weights, line heights), Iconography library, Button styles, Form element styles, Spacing and Grid system, Logo usage guidelines, etc.
+
+6. System Architecture
+6.1 Overview (High-Level Diagram Description):
+A multi-tier architecture:
+Client Tier: User's web browser rendering the PWA (HTML, CSS, JavaScript).
+Web/Load Balancer Tier: Nginx/HAProxy distributing traffic, SSL termination, serving static assets (potentially via CDN).
+Application Tier (Backend API): Stateless RESTful API servers (e.g., multiple instances of Node.js/Express, Python/Django, or Java/Spring Boot).
+Data Tier: Primary relational database (e.g., PostgreSQL, MySQL), Caching layer (e.g., Redis), Search Index (e.g., Elasticsearch - future), Message Queue (e.g., RabbitMQ - future).
+Supporting Services: Email Service, (Future SMS Gateway), Monitoring & Logging Service.
+
+
+Diagram would show these tiers and data flow.
+
+
+6.2 Frontend Architecture:
+Framework: Modern JavaScript framework like React, Vue.js, or Angular, chosen for PWA capabilities, component-based architecture, and ecosystem.
+State Management: Client-side state management library (e.g., Redux, Vuex, Zustand) for complex application states.
+Routing: Client-side routing for SPA-like experience.
+Build Tools: Webpack, Parcel, or similar for bundling, transpilation, and optimization.
+PWA Service Worker: Implementation of a service worker for caching strategies (cache-first for static assets, network-first or stale-while-revalidate for API data), offline capabilities, and enabling PWA installation.
+API Communication: Using fetch API or libraries like axios for making asynchronous requests to the backend API.
+
+
+6.3 Backend Architecture:
+Framework: Robust backend framework (e.g., Node.js with Express.js for JavaScript full-stack, Python with Django/Flask for rapid development & data science capabilities, Java with Spring Boot for enterprise-grade stability). Choice depends on team expertise and specific needs.
+API Type: RESTful API design using JSON for data interchange. (GraphQL considered for future if frontend data needs become very complex).
+Authentication: JWT (JSON Web Tokens) based authentication for stateless sessions. Tokens include user ID, roles, expiry. Securely stored on client (e.g., HttpOnly cookie or localStorage with XSS mitigations).
+Authorization: Middleware to check permissions based on user roles and ownership for accessing resources.
+Business Logic Layer: Services or modules encapsulating core business rules, separated from controllers/request handlers.
+Data Access Layer: ORM (e.g., Sequelize, TypeORM for Node.js; SQLAlchemy for Python; Hibernate/JPA for Java) or query builders to interact with the database, abstracting SQL.
+
+
+6.4 API Design Principles:
+Resource-Oriented: Endpoints designed around resources (e.g., /users, /listings, /exchanges).
+Standard HTTP Methods: Correct use of GET, POST, PUT, DELETE, PATCH.
+Stateless: Each API request should contain all necessary information; server does not rely on prior request state.
+Versioning: API versioning in the URL (e.g., /api/v1/resource) to allow for future non-breaking changes.
+Consistent Naming Conventions: (e.g., kebab-case for URLs, camelCase for JSON properties).
+Clear Error Responses: Standardized JSON error responses with appropriate HTTP status codes (4xx for client errors, 5xx for server errors) and informative error messages/codes.
+Pagination, Sorting, Filtering: Support for these in GET requests for collections of resources via query parameters (e.g., ?page=2&limit=20&sort=-createdAt&category=tutoring).
+Documentation: API documented using OpenAPI (Swagger) specification.
+
+
+6.5 Database Architecture:
+Primary Database: Relational Database Management System (RDBMS) like PostgreSQL (preferred for its features and extensibility) or MySQL. Chosen for ACID properties and structured data.
+Schema: Detailed schema provided in Section 7. Proper indexing on frequently queried columns (foreign keys, search fields, sort fields).
+Caching Layer: In-memory data store like Redis or Memcached for caching frequently accessed, less volatile data (e.g., user profiles, popular listings, system configurations) to reduce database load and improve API response times.
+Search Index (Future): For advanced search capabilities beyond basic SQL LIKE (e.g., full-text search, relevance ranking, faceting), Elasticsearch or Apache Solr might be integrated. V1.0 may rely on RDBMS search capabilities.
+Message Queue (Future/Asynchronous Tasks): For tasks like sending email notifications, processing image uploads, or generating reports, a message queue like RabbitMQ or AWS SQS will be used to decouple services and improve responsiveness. V1.0 may handle some simpler tasks synchronously or via cron jobs if load is low.
+
+
+6.6 Infrastructure & Deployment Strategy:
+Cloud Provider: Major cloud provider like AWS (Amazon Web Services), Google Cloud Platform (GCP), or Microsoft Azure, leveraging their Indian regions for lower latency and data sovereignty.
+Containerization: Application components (frontend, backend API) packaged as Docker containers.
+Orchestration: Kubernetes (EKS, GKE, AKS) or a simpler orchestration service (ECS, Cloud Run) for managing, scaling, and deploying containerized applications.
+Database Hosting: Managed database service from the cloud provider (e.g., AWS RDS, Google Cloud SQL) for ease of maintenance, backups, and scaling.
+Load Balancing: Cloud provider's load balancer service to distribute traffic across application instances.
+CDN: Cloud provider's CDN (CloudFront, Cloud CDN) or a third-party CDN (Cloudflare) for static asset delivery.
+CI/CD Pipeline: Tools like Jenkins, GitLab CI, GitHub Actions, or AWS CodePipeline to automate build, test, and deployment processes triggered by code commits to version control.
+Environments: Separate environments for Development, Staging/Testing (UAT), and Production.
+Monitoring & Logging: Centralized logging (e.g., ELK Stack - Elasticsearch, Logstash, Kibana; or CloudWatch Logs, Google Cloud Logging) and application performance monitoring (APM) tools (e.g., Sentry, New Relic, Datadog). Alerting for critical errors and performance degradation.
+
+
+6.7 Third-Party Integrations:
+Email Service: Transactional email service like Amazon SES, SendGrid, or Mailgun for sending verification emails, notifications, password resets. Chosen for reliability and deliverability.
+(Future) SMS Gateway: For users preferring SMS notifications or for OTPs if phone registration is added. Requires integration with an Indian SMS gateway provider.
+(Future) Analytics Platform: Google Analytics or similar for tracking frontend user behavior and PWA engagement (with user consent).
+(Future) Identity Verification Service: If enhanced ID verification is implemented, integration with a relevant service (e.g., via DigiLocker APIs if feasible and compliant).
+
+7. Database Schema (Detailed)
+(Note: TEXT implies variable length string, suitable for descriptions. VARCHAR(n) for fixed max length strings. TIMESTAMPTZ for timestamps with timezone - typically stored in UTC. SERIAL or BIGSERIAL for auto-incrementing primary keys in PostgreSQL. BOOLEAN for true/false. DECIMAL(precision, scale) for currency/credits. Indexes are crucial and should be added based on query patterns.)
+7.1 Users Table
+user_id (BIGSERIAL, PK) - Unique identifier for the user.
+username (VARCHAR(50), UNIQUE, NOT NULL) - User-chosen unique username.
+email (VARCHAR(255), UNIQUE, NOT NULL) - User's email address.
+password_hash (VARCHAR(255), NOT NULL) - Hashed password.
+first_name (VARCHAR(100), NOT NULL) - User's first name.
+last_name (VARCHAR(100), NULL) - User's last name.
+profile_picture_url (VARCHAR(512), NULL) - URL to the profile picture.
+bio (TEXT, NULL) - Short biography of the user.
+city (VARCHAR(100), NOT NULL) - User's city/town.
+pincode (VARCHAR(6), NOT NULL) - User's 6-digit Pincode.
+general_availability (VARCHAR(255), NULL) - Text describing general availability.
+sphere_credit_balance (DECIMAL(10, 2), NOT NULL, DEFAULT 0.00) - Current balance of SphereCredits.
+avg_rating (DECIMAL(3, 2), NULL) - Average star rating received from reviews.
+total_reviews_received (INTEGER, NOT NULL, DEFAULT 0) - Count of reviews received.
+is_email_verified (BOOLEAN, NOT NULL, DEFAULT FALSE) - Flag indicating if email is verified.
+email_verification_token (VARCHAR(100), NULL, UNIQUE) - Token for email verification.
+email_verification_expires_at (TIMESTAMPTZ, NULL) - Expiry for verification token.
+password_reset_token (VARCHAR(100), NULL, UNIQUE) - Token for password reset.
+password_reset_expires_at (TIMESTAMPTZ, NULL) - Expiry for reset token.
+status (VARCHAR(20), NOT NULL, DEFAULT 'pending_verification') - Account status ('pending_verification', 'active', 'suspended', 'deactivated', 'banned').
+preferred_language_ui (VARCHAR(10), NOT NULL, DEFAULT 'en') - Preferred UI language (for future localization).
+notification_preferences (JSONB, NULL) - Stores user's email notification settings.
+last_login_at (TIMESTAMPTZ, NULL) - Timestamp of the last login.
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP) - Timestamp of account creation.
+updated_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP) - Timestamp of last profile update.
+Indexes: username, email, pincode, status.
+
+
+7.2 User_Auth_Tokens Table (For managing active sessions/refresh tokens if JWTs are very short-lived)
+token_id (BIGSERIAL, PK)
+user_id (BIGINT, FK to Users.user_id, NOT NULL)
+token_hash (VARCHAR(255), UNIQUE, NOT NULL) - Hash of the refresh token.
+device_info (VARCHAR(255), NULL) - E.g., User agent, IP (for user to review active sessions).
+expires_at (TIMESTAMPTZ, NOT NULL)
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: user_id, token_hash.
+
+
+7.3 Skills Table (Predefined list managed by Admins)
+skill_id (SERIAL, PK) - Unique identifier for the skill.
+skill_name (VARCHAR(100), UNIQUE, NOT NULL) - Name of the skill (e.g., "Python Programming", "Gardening").
+category_id (INTEGER, FK to Categories.category_id, NOT NULL) - Links to a parent category.
+description (TEXT, NULL) - Optional description of the skill.
+is_active (BOOLEAN, NOT NULL, DEFAULT TRUE)
+Indexes: skill_name, category_id.
+
+
+7.4 Categories Table (Predefined service categories)
+category_id (SERIAL, PK) - Unique identifier for the category.
+category_name (VARCHAR(100), UNIQUE, NOT NULL) - Name of the category (e.g., "Education & Tutoring", "Home & Garden").
+parent_category_id (INTEGER, FK to Categories.category_id, NULL) - For hierarchical categories.
+description (TEXT, NULL)
+icon_url (VARCHAR(255), NULL) - Optional icon for the category.
+is_active (BOOLEAN, NOT NULL, DEFAULT TRUE)
+Indexes: category_name, parent_category_id.
+
+
+7.5 User_Skills_Offered Table (Junction table for user's offered skills - from predefined list)
+user_skill_id (BIGSERIAL, PK)
+user_id (BIGINT, FK to Users.user_id, NOT NULL)
+skill_id (INTEGER, FK to Skills.skill_id, NOT NULL)
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: (user_id, skill_id) UNIQUE constraint and index.
+
+
+7.6 Service_Listings Table
+listing_id (BIGSERIAL, PK) - Unique identifier for the listing.
+lister_user_id (BIGINT, FK to Users.user_id, NOT NULL) - User who created the listing.
+listing_type (VARCHAR(10), NOT NULL) - Type of listing ('offer' or 'request').
+title (VARCHAR(100), NOT NULL) - Title of the service listing.
+description (TEXT, NOT NULL) - Detailed description of the service.
+category_id (INTEGER, FK to Categories.category_id, NOT NULL) - Primary category.
+custom_skill_tags (TEXT[], NULL) - Array of user-defined skill tags.
+estimated_hours (DECIMAL(5, 2), NOT NULL) - Estimated hours, translates to SphereCredits.
+location_type (VARCHAR(20), NOT NULL) - 'provider_location', 'requester_location', 'virtual', 'negotiable'.
+specific_location_details (TEXT, NULL) - Additional location info.
+availability_details (TEXT, NULL) - Specific availability for this listing.
+status (VARCHAR(20), NOT NULL, DEFAULT 'active') - Listing status ('active', 'inactive', 'pending_completion', 'completed', 'cancelled', 'expired').
+views_count (INTEGER, NOT NULL, DEFAULT 0) - Number of times listing detail page viewed (basic tracking).
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+updated_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+expires_at (TIMESTAMPTZ, NULL) - Optional expiry date for listings.
+Indexes: lister_user_id, listing_type, category_id, status, created_at. Full-text search index on title & description.
+
+
+7.7 Listing_Images Table
+image_id (BIGSERIAL, PK)
+listing_id (BIGINT, FK to Service_Listings.listing_id ON DELETE CASCADE, NOT NULL)
+image_url (VARCHAR(512), NOT NULL) - URL of the uploaded image.
+caption (VARCHAR(255), NULL)
+sort_order (INTEGER, DEFAULT 0) - For ordering multiple images.
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: listing_id.
+
+
+7.8 Service_Exchanges Table
+exchange_id (BIGSERIAL, PK) - Unique identifier for the service exchange.
+listing_id (BIGINT, FK to Service_Listings.listing_id, NULL) - Original listing, if applicable. (Could be a direct agreement too).
+provider_user_id (BIGINT, FK to Users.user_id, NOT NULL) - User providing the service.
+requester_user_id (BIGINT, FK to Users.user_id, NOT NULL) - User receiving the service.
+agreed_hours (DECIMAL(5, 2), NOT NULL) - SphereCredits agreed for the exchange.
+agreement_summary (TEXT, NULL) - Optional summary of agreed terms.
+status (VARCHAR(30), NOT NULL, DEFAULT 'proposed') - Exchange status ('proposed', 'accepted', 'provider_confirmed_delivery', 'requester_confirmed_completion', 'completed', 'disputed', 'cancelled_by_provider', 'cancelled_by_requester', 'cancelled_mutual', 'admin_resolved').
+proposed_at (TIMESTAMPTZ, NULL)
+accepted_at (TIMESTAMPTZ, NULL)
+provider_marked_delivered_at (TIMESTAMPTZ, NULL)
+requester_confirmed_completion_at (TIMESTAMPTZ, NULL)
+completed_at (TIMESTAMPTZ, NULL) - Final completion timestamp.
+dispute_reason (TEXT, NULL) - If disputed by requester.
+admin_resolution_notes (TEXT, NULL) - Notes if admin resolved a dispute.
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+updated_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: provider_user_id, requester_user_id, listing_id, status, created_at.
+
+
+7.9 Reviews Table
+review_id (BIGSERIAL, PK)
+exchange_id (BIGINT, FK to Service_Exchanges.exchange_id ON DELETE CASCADE, NOT NULL, UNIQUE) - Ensure one review pair per exchange.
+reviewer_user_id (BIGINT, FK to Users.user_id, NOT NULL) - User who wrote the review.
+reviewee_user_id (BIGINT, FK to Users.user_id, NOT NULL) - User who is being reviewed.
+rating (INTEGER, NOT NULL, CHECK (rating >= 1 AND rating <= 5)) - Star rating.
+comment (TEXT, NULL) - Public review comment.
+is_public (BOOLEAN, NOT NULL, DEFAULT FALSE) - Becomes true after double-blind conditions met.
+submitted_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP) - When this specific review was submitted.
+published_at (TIMESTAMPTZ, NULL) - When it became public.
+Constraint: reviewer_user_id != reviewee_user_id.
+Indexes: exchange_id, reviewer_user_id, reviewee_user_id, published_at.
+Consider separate rows for provider_review and requester_review if a single exchange_id needs two review entries. (Alternative design: review_id PK, exchange_id FK, reviewer_user_id FK, reviewee_user_id FK, rating, comment, review_type ('provider_review', 'requester_review'), (exchange_id, review_type) UNIQUE). The current design assumes one review object captures one side, linked by exchange_id where a pair exists. Let's refine:
+Refined Reviews Table (One row per submitted review):
+review_id (BIGSERIAL, PK)
+exchange_id (BIGINT, FK to Service_Exchanges.exchange_id ON DELETE CASCADE, NOT NULL)
+reviewer_user_id (BIGINT, FK to Users.user_id, NOT NULL)
+reviewee_user_id (BIGINT, FK to Users.user_id, NOT NULL)
+rating (INTEGER, NOT NULL, CHECK (rating >= 1 AND rating <= 5))
+comment (TEXT, NULL)
+is_reviewer_provider (BOOLEAN, NOT NULL) - True if reviewer was the provider in the exchange.
+is_published (BOOLEAN, NOT NULL, DEFAULT FALSE) - Becomes true when conditions met.
+submitted_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+UNIQUE constraint: (exchange_id, reviewer_user_id).
+Indexes: exchange_id, reviewer_user_id, reviewee_user_id.
+
+
+7.10 Conversations Table (To group messages between users)
+conversation_id (BIGSERIAL, PK)
+participant1_user_id (BIGINT, FK to Users.user_id, NOT NULL)
+participant2_user_id (BIGINT, FK to Users.user_id, NOT NULL)
+last_message_id (BIGINT, FK to Messages.message_id, NULL) - For quick preview of last message.
+last_message_at (TIMESTAMPTZ, NULL)
+participant1_unread_count (INTEGER, NOT NULL, DEFAULT 0)
+participant2_unread_count (INTEGER, NOT NULL, DEFAULT 0)
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+updated_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+CHECK (participant1_user_id < participant2_user_id) to ensure canonical conversation ID.
+UNIQUE constraint: (participant1_user_id, participant2_user_id).
+Indexes: participant1_user_id, participant2_user_id, last_message_at.
+
+
+7.11 Messages Table
+message_id (BIGSERIAL, PK)
+conversation_id (BIGINT, FK to Conversations.conversation_id ON DELETE CASCADE, NOT NULL)
+sender_user_id (BIGINT, FK to Users.user_id, NOT NULL)
+receiver_user_id (BIGINT, FK to Users.user_id, NOT NULL) - Denormalized for easier queries, but conversation_id is key.
+content (TEXT, NOT NULL) - Message text.
+sent_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+read_at (TIMESTAMPTZ, NULL) - Timestamp when receiver read the message.
+Indexes: conversation_id, sender_user_id, sent_at.
+
+
+7.12 Notifications Table
+notification_id (BIGSERIAL, PK)
+recipient_user_id (BIGINT, FK to Users.user_id ON DELETE CASCADE, NOT NULL)
+type (VARCHAR(50), NOT NULL) - Notification type (e.g., 'new_message', 'exchange_proposed', 'review_received').
+related_entity_type (VARCHAR(50), NULL) - E.g., 'exchange', 'listing', 'user'.
+related_entity_id (BIGINT, NULL) - ID of the related entity.
+content_preview (TEXT, NOT NULL) - Short text content of the notification.
+is_read (BOOLEAN, NOT NULL, DEFAULT FALSE)
+read_at (TIMESTAMPTZ, NULL)
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: recipient_user_id, is_read, created_at.
+
+
+7.13 Reported_Content Table
+report_id (BIGSERIAL, PK)
+reporter_user_id (BIGINT, FK to Users.user_id, NOT NULL)
+reported_item_type (VARCHAR(50), NOT NULL) - E.g., 'user_profile', 'service_listing', 'review', 'message'.
+reported_item_id (BIGINT, NOT NULL) - ID of the reported profile, listing, review, etc.
+reported_user_id (BIGINT, FK to Users.user_id, NULL) - User whose content/profile is reported.
+reason_category (VARCHAR(100), NOT NULL) - Predefined reason for reporting.
+reason_description (TEXT, NULL) - Additional details from reporter.
+status (VARCHAR(20), NOT NULL, DEFAULT 'pending_review') - 'pending_review', 'under_investigation', 'action_taken', 'dismissed'.
+admin_reviewer_id (INTEGER, FK to Admin_Users.admin_id, NULL) - Admin who handled it.
+admin_action_taken (VARCHAR(100), NULL) - E.g., 'content_removed', 'user_warned', 'no_action'.
+admin_notes (TEXT, NULL)
+reported_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+resolved_at (TIMESTAMPTZ, NULL)
+Indexes: status, reported_item_type, reported_item_id, reporter_user_id, reported_user_id.
+
+
+7.14 Admin_Users Table
+admin_id (SERIAL, PK)
+username (VARCHAR(50), UNIQUE, NOT NULL)
+email (VARCHAR(255), UNIQUE, NOT NULL)
+password_hash (VARCHAR(255), NOT NULL)
+full_name (VARCHAR(100), NOT NULL)
+role (VARCHAR(20), NOT NULL, DEFAULT 'moderator') - E.g., 'super_admin', 'moderator', 'support'.
+is_active (BOOLEAN, NOT NULL, DEFAULT TRUE)
+last_login_at (TIMESTAMPTZ, NULL)
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: username, email, role.
+
+
+7.15 Audit_Logs Table (For admin actions and critical system events)
+log_id (BIGSERIAL, PK)
+timestamp (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+actor_type (VARCHAR(20), NOT NULL) - 'admin', 'system', 'user'.
+actor_id (BIGINT, NULL) - ID of the admin or user performing action.
+action_type (VARCHAR(100), NOT NULL) - E.g., 'user_suspended', 'content_removed', 'credit_adjusted', 'config_changed'.
+target_entity_type (VARCHAR(50), NULL) - E.g., 'user', 'listing', 'exchange'.
+target_entity_id (BIGINT, NULL) - ID of the affected entity.
+details (JSONB, NULL) - Additional details of the action (e.g., old value, new value).
+ip_address (VARCHAR(45), NULL) - IP address of actor if applicable.
+Indexes: timestamp, actor_type, actor_id, action_type, target_entity_type, target_entity_id.
+
+
+7.16 Blocked_Users Table (User A blocks User B)
+block_id (BIGSERIAL, PK)
+blocker_user_id (BIGINT, FK to Users.user_id ON DELETE CASCADE, NOT NULL) - User who initiated the block.
+blocked_user_id (BIGINT, FK to Users.user_id ON DELETE CASCADE, NOT NULL) - User who is blocked.
+created_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+UNIQUE constraint: (blocker_user_id, blocked_user_id).
+Indexes: blocker_user_id, blocked_user_id.
+
+
+7.17 System_Parameters Table (For admin-configurable platform settings)
+parameter_id (SERIAL, PK)
+parameter_name (VARCHAR(100), UNIQUE, NOT NULL) - E.g., 'initial_seed_credits', 'review_window_days'.
+parameter_value (VARCHAR(255), NOT NULL)
+description (TEXT, NULL)
+data_type (VARCHAR(20), NOT NULL, DEFAULT 'string') - 'string', 'integer', 'boolean', 'decimal'.
+updated_at (TIMESTAMPTZ, NOT NULL, DEFAULT CURRENT_TIMESTAMP)
+Indexes: parameter_name.
+
+
+
+8. Risk Assessment & Mitigation Strategies
+(This section reiterates and confirms the detailed risk table previously provided, ensuring it aligns with the final scope. Refer back to the comprehensive table in the earlier response that included Likelihood, Impact, and detailed Mitigation Strategies specific to the Indian context for each risk: Low User Adoption, Service Imbalance, Trust/Safety/Security, Digital Divide, Connectivity Issues, Cultural Misunderstandings, Platform Sustainability, and Competition from Informal Networks.)
+Key Mitigation Focus Areas for V1.0:
+Trust & Safety: Robust reporting/moderation, clear Community Guidelines, secure authentication, double-blind reviews, user blocking. Proactive education on safe exchange practices.
+User Adoption: Hyperlocal launch strategy, partnerships with local community groups (RWAs, SHGs if possible for outreach), simple onboarding, valuable seed credits.
+Usability: Mobile-first PWA, simple UI in English, intuitive flows.
+Technical Stability: Cloud hosting in India, performance optimization for mobile networks, reliable data backups.
+DPDPA Compliance: Privacy by design, clear policies, consent mechanisms.
+
+(Continuing from previous response)
+
+9. Success Metrics & Key Performance Indicators (KPIs)
+(Metrics will be tracked with defined regularity (e.g., daily, weekly, monthly) and targets set for key milestones like 3 months, 6 months, 1 year post-launch.)
+9.1 User Acquisition & Growth
+KPI-UAG-001: Total Registered Users: Absolute number of users who have completed registration and email verification.
+KPI-UAG-002: New User Growth Rate: Percentage increase in registered users (week-over-week, month-over-month).
+KPI-UAG-003: User Acquisition Cost (CAC) (Future): If paid marketing is used. (Not applicable for V1.0 organic growth).
+KPI-UAG-004: Activation Rate: Percentage of registered users who complete their profile (e.g., add at least one skill offered) within 7 days of registration.
+KPI-UAG-005: Source of Acquisition: Tracking how users discover the platform (e.g., referral, community partner, organic search - via survey or UTM tags if applicable).
+
+
+9.2 User Engagement & Activity
+KPI-UEA-001: Daily Active Users (DAU): Number of unique users logging in/performing an action on a given day.
+KPI-UEA-002: Monthly Active Users (MAU): Number of unique users logging in/performing an action in a given month.
+KPI-UEA-003: DAU/MAU Ratio (Stickiness): Indicates how frequently users return.
+KPI-UEA-004: Service Listings Created: Number of new Service Offers and Service Requests created per period.
+Sub-KPI: Offer to Request Ratio (aim for a healthy balance).
+
+
+KPI-UEA-005: Exchanges Initiated: Number of new Exchange Agreements proposed per period.
+KPI-UEA-006: Exchanges Completed: Number of successfully completed and confirmed exchanges per period.
+KPI-UEA-007: SphereCredits Exchanged: Total volume of SphereCredits transferred in completed exchanges per period.
+KPI-UEA-008: Average Session Duration: Average time spent on the platform per user session.
+KPI-UEA-009: Messages Sent: Total number of messages exchanged within the platform.
+KPI-UEA-010: Feature Adoption Rate: Percentage of active users utilizing key features (e.g., search, messaging, reviews).
+KPI-UEA-011: User Retention Rate: Percentage of users active in month N who are still active in month N+1, N+3.
+KPI-UEA-012: Churn Rate: Percentage of users who become inactive per period.
+
+
+9.3 Community Health & Balance
+KPI-CHB-001: Diversity of Skills Listed: Number of unique skill categories with active listings.
+KPI-CHB-002: Diversity of Skills Exchanged: Number of unique skill categories involved in completed exchanges.
+KPI-CHB-003: User-to-User Connection Rate: Average number of unique users a member has exchanged services with.
+KPI-CHB-004: Ratio of Active Providers to Active Requesters: Monitor for balance within the ecosystem.
+KPI-CHB-005: Geographic Spread of Activity: Track activity levels across different Pincodes/cities in pilot areas.
+KPI-CHB-006: Average Time to First Exchange: Time taken for a new user to complete their first exchange (as provider or requester).
+
+
+9.4 Platform Performance & Stability
+KPI-PPS-001: Uptime Percentage: (Target: >99.5%).
+KPI-PPS-002: Average Page Load Time: For key pages.
+KPI-PPS-003: API Error Rate: Percentage of API calls resulting in 5xx errors. (Target: <0.1%).
+KPI-PPS-004: Application Crash Rate (PWA/Future Native Apps): Number of crashes per user session.
+KPI-PPS-005: Database Performance Metrics: Avg query latency, connection usage.
+
+
+9.5 Trust & Satisfaction
+KPI-TSS-001: User Satisfaction Score (CSAT): Measured via post-exchange surveys or general platform surveys. (Target: >75%).
+KPI-TSS-002: Net Promoter Score (NPS) (Future): Measure user loyalty and willingness to recommend.
+KPI-TSS-003: Number of Reviews Submitted: And ratio of reviews to completed exchanges.
+KPI-TSS-004: Average Review Score Given/Received: Monitor overall sentiment.
+KPI-TSS-005: Number of Reported Issues (Content/Users): Track volume and types of reports.
+KPI-TSS-006: Report Resolution Time: Average time taken by admins to address reported issues.
+KPI-TSS-007: User Feedback Sentiment: Qualitative analysis of feedback from support channels, reviews, surveys.
+
+
+9.6 Operational Efficiency
+KPI-OPE-001: Admin Response Time to Support Queries: Average time to first response and resolution.
+KPI-OPE-002: Content Moderation Efficiency: Number of items moderated per admin hour, accuracy of moderation.
+KPI-OPE-003: Cost of Hosting per Active User (Future): Monitor infrastructure costs.
+
+
+
+10. Future Considerations & Potential Roadmap (Post V1.0)
+(This outlines potential enhancements and new features beyond the initial V1.0 launch, subject to user feedback, market demand, and strategic priorities.)
+Phase 1.x (Short-Term Enhancements - within 3-9 months post V1.0 launch):
+Native Mobile Applications (iOS & Android): Develop dedicated native apps for improved performance, user experience, and access to device features (e.g., better push notifications).
+Phone Number OTP Registration/Login: Add option for users to register/login using mobile number and OTP, appealing to a broader Indian audience.
+Enhanced Search & Filtering: More granular filters (e.g., user availability, specific user ratings), saved searches, personalized recommendations.
+UI Localization - Phase 1 (Hindi): Translate the core UI elements and system messages into Hindi.
+Basic Gamification: Introduce points, simple badges for activities like completing profile, first exchange, leaving reviews, to encourage engagement.
+Improved Onboarding: Interactive tutorials, guided tours for new users.
+Optional User Identity Verification - Light Touch: Explore options for a "Verified User" badge (e.g., admin vouching, optional document snippet check via secure third-party, if compliant and user-friendly).
+Calendar View for Availability: Allow users to mark their availability more granularly on a calendar interface.
+
+
+Phase 2.x (Medium-Term Features - within 9-18 months):
+Organizational Accounts - Basic: Allow RWAs, SHGs, small NGOs to create profiles, post group requests/offers, and coordinate volunteer activities using SphereCredits within their group.
+Event/Workshop Listings: Allow users or organizations to list time-based events or workshops (e.g., "2-hour community cleanup - 2 SphereCredits for participation," "1-hour coding workshop - Free or 0.5 SphereCredits").
+Group Services: Allow users to offer or request services that involve multiple providers or requesters.
+Advanced SphereCredit Features:
+Ability to "donate" SphereCredits to specific community projects or a central community fund managed by admins.
+Time-limited or expiring credits to encourage circulation (requires careful consideration of user impact).
+
+
+UI Localization - Phase 2 (More Regional Languages): Expand UI translation to other major Indian languages based on user demographics and demand (e.g., Tamil, Telugu, Bengali, Marathi).
+Integrated Scheduling Suggestions: Basic tools to help users find mutually convenient times for exchanges (without full calendar sync initially).
+Enhanced Admin Analytics & Reporting: More sophisticated dashboards and reporting tools for admins.
+
+
+Phase 3.x (Long-Term Vision - 18+ months):
+Advanced AI-Powered Matching & Recommendations: More intelligent suggestions for services and users based on behavior, skills, location, and inferred needs.
+Full Calendar Integration: Option to sync with external calendars (Google Calendar, Outlook Calendar) for scheduling exchanges.
+Organizational Accounts - Advanced: More features for organizations, like member management, sub-groups, reporting specific to their activities.
+IVR (Interactive Voice Response) System - Exploration: Investigate feasibility of an IVR system for basic service requests/offers for users without smartphone access or with very low digital literacy (significant complexity and cost).
+Hyperlocal Community Hubs: Potential for features that support very specific neighborhood-level initiatives or forums within the platform.
+Partnerships for Skill Development: Integrate or link to resources for users to learn new skills they can then offer on the timebank.
+Cross-TimeBank Network (Ambitious): Potential for linking with other compatible timebanks if they emerge, allowing credit transfer (very complex governance).
+
+
+
+11. Release Criteria (V1.0)
+(The platform must meet these criteria before being launched to the public.)
+RC-001 (Functional Completeness): All functional requirements defined as "In Scope (V1.0)" in Section 1.5 and detailed in Section 3 are fully implemented, unit tested, and integration tested.
+RC-002 (Critical Non-Functional Requirements Met):
+Performance: Key pages load within defined thresholds (NFR-PER-001). API responses are acceptable (NFR-PER-002).
+Security: All critical security NFRs implemented (HTTPS, password hashing, protection against OWASP Top 10 basics, DPDPA considerations addressed in design). A basic security review/checklist passed.
+Availability: Deployment architecture supports target uptime. Backup and recovery procedures tested once.
+Usability: Platform is navigable and core flows are understandable by target users. PWA is installable and offers basic offline caching. Mobile responsiveness verified on common devices.
+Accessibility: Basic accessibility checks passed (e.g., keyboard navigation, alt text for informative images, reasonable color contrast).
+
+
+RC-003 (Testing Completion & Quality):
+Successful completion of internal System Integration Testing (SIT).
+Successful completion of User Acceptance Testing (UAT) by a diverse group of pilot users representing the target audience in India. All critical and major bugs identified during UAT must be resolved.
+No outstanding "Showstopper" or "Critical" bugs in the bug tracking system. A minimal, agreed-upon number of "Major" bugs may be acceptable if workarounds exist and they don't impact core functionality or security.
+Automated test suite (unit tests) achieves defined code coverage targets for backend.
+
+
+RC-004 (Admin Panel Functionality): Admin panel is fully functional for core tasks: user management (view, suspend, ban), content moderation (review reported items, manage listings), and viewing basic analytics.
+RC-005 (Legal & Compliance):
+Terms of Service, Privacy Policy, and Community Guidelines are finalized, reviewed by legal counsel (for DPDPA and general compliance in India), and accessible on the platform.
+Consent mechanisms for data processing are implemented as per DPDPA.
+
+
+RC-006 (Documentation & Support Readiness):
+User-facing documentation (FAQ, "How It Works" guide) is ready and published in English.
+Internal documentation for support staff (e.g., admin panel guide, common issue resolution steps) is prepared.
+A basic user support plan and channel (e.g., email support) are in place and staffed.
+
+
+RC-007 (Infrastructure & Deployment Readiness): Production environment is configured, tested, and ready for launch. Monitoring, logging, and alerting are set up for key system health indicators.
+RC-008 (Marketing & Launch Plan): A basic launch plan for pilot cities is in place, including communication strategy for initial user acquisition (e.g., through community partners).
+RC-009 (Go/No-Go Decision): Formal sign-off from key stakeholders (Product Owner, Tech Lead, Business Lead) based on the fulfillment of the above criteria.
+
+12. Glossary
+(This section would reiterate the definitions from Section 1.6 for easy reference.)
+ConnectSphere: The official name of the TimeBank platform.
+SphereCredit: The unit of time-based currency used on the platform (standard: 1 hour of service = 1 SphereCredit).
+Provider: A registered user offering a service on the platform.
+Requester: A registered user requesting a service on the platform.
+Listing: A Service Offer or a Service Request posted on the platform.
+Exchange: An agreed-upon transaction of service between a Provider and a Requester.
+PWA: Progressive Web App.
+RWA: Resident Welfare Association.
+SHG: Self-Help Group.
+NGO: Non-Governmental Organization.
+UI: User Interface.
+UX: User Experience.
+API: Application Programming Interface.
+CRUD: Create, Read, Update, Delete.
+KPI: Key Performance Indicator.
+DPDPA: Digital Personal Data Protection Act, 2023 (India).
+IST: Indian Standard Time.
+WCAG: Web Content Accessibility Guidelines.
+CSAT: Customer Satisfaction Score.
+MAU: Monthly Active Users.
+DAU: Daily Active Users.
+JWT: JSON Web Token.
+ORM: Object-Relational Mapper.
+CDN: Content Delivery Network.
+CI/CD: Continuous Integration/Continuous Deployment.
+SIT: System Integration Testing.
+UAT: User Acceptance Testing.
+
+13. Appendices (Optional)
+13.1 Community Guidelines Outline (Conceptual)
+Introduction: Purpose of guidelines, commitment to a safe and respectful community.
+Core Principles: Respect, Trust, Fairness, Inclusivity, Safety.
+Expected Behavior:
+Be polite and courteous in all communications.
+Honor commitments made for exchanges.
+Provide accurate descriptions of services offered/requested.
+Leave fair and honest reviews.
+Respect others' privacy.
+
+
+Prohibited Content & Activities:
+Illegal activities or services.
+Hate speech, discrimination, harassment, bullying.
+Violence, threats, or incitement to violence.
+Sexually explicit content or solicitation (adult services).
+Misleading information, spam, scams.
+Impersonation.
+Sharing private information of others without consent.
+Requesting or offering monetary payment for services within ConnectSphere.
+Services involving weapons, drugs, or other harmful substances.
+Infringement of intellectual property.
+
+
+Safety Guidelines for Offline Exchanges:
+Meet in public places for the first time if possible.
+Inform a friend or family member about your plans.
+Trust your instincts; don't proceed if uncomfortable.
+Don't share overly personal or financial information immediately.
+Clarify expectations beforehand.
+
+
+Reporting Violations: How to use the reporting mechanism.
+Consequences of Violations: Warnings, content removal, temporary suspension, permanent ban, reporting to authorities if legally required. Platform reserves the right to determine appropriate action.
+Updates to Guidelines: How users will be informed of changes.
+
+
+13.2 Privacy Policy Key Considerations (Align with DPDPA)
+Data Controller Information: ConnectSphere entity details.
+Data Protection Officer (DPO) Contact: If applicable/appointed.
+Personal Data Collected: List of data points (e.g., name, email, username, location, skills, IP address, usage data).
+Purposes of Data Processing: Clearly state why each type of data is collected and processed (e.g., account creation, service matching, communication, platform improvement, security, legal compliance).
+Legal Basis for Processing: Primarily user consent; also legitimate interests, contractual necessity (Terms of Service).
+Consent Mechanisms: How consent is obtained (e.g., registration checkbox, specific feature opt-ins) and how it can be withdrawn.
+Data Sharing & Third Parties: With whom data might be shared (e.g., email service provider, cloud hosting – specify categories) and for what purposes. No sale of personal data.
+Data Storage & Security: Security measures implemented to protect data. Data storage location (primarily India).
+Data Retention Periods: How long data is kept for different purposes and after account deactivation.
+User Rights under DPDPA:
+Right to access personal data.
+Right to correction and erasure of personal data.
+Right to grievance redressal.
+Right to nominate.
+
+
+Cookies & Tracking Technologies: Explanation of cookies used (essential, analytics - with consent) and how to manage preferences.
+Children's Privacy: Platform not intended for users under 18.
+International Data Transfers: If any data is processed outside India (e.g., by a global service provider), explain safeguards.
+Policy Updates: How users will be informed.
+Contact Information for Privacy Queries.
+
+
+13.3 Terms of Service Key Considerations
+Acceptance of Terms: By registering/using the platform, users agree to ToS.
+Eligibility: Age requirement (18+), capacity to contract.
+Account Responsibilities: Accuracy of information, security of credentials, acceptable use.
+Platform as a Facilitator: ConnectSphere provides the platform for users to connect and exchange services. It is not a party to the actual service exchange between users. ConnectSphere does not guarantee the quality, safety, or legality of services offered or the truthfulness of user content.
+SphereCredit System: Explanation of SphereCredits as a non-monetary unit of exchange, not convertible to cash, no inherent monetary value.
+User Conduct: Reference to and incorporation of Community Guidelines.
+Content Ownership & Licenses: Users retain ownership of their content but grant ConnectSphere a license to use it for platform operation and promotion (e.g., display listings).
+Intellectual Property of ConnectSphere: Platform software, branding, content are protected.
+Disclaimers & Limitation of Liability:
+Platform provided "as is."
+ConnectSphere not liable for disputes between users, quality of services, or user conduct (offline or online), except as required by law.
+Limitations on financial liability.
+
+
+Indemnification: Users agree to indemnify ConnectSphere against claims arising from their misuse of the platform or violation of ToS.
+Termination & Suspension: ConnectSphere's right to suspend or terminate accounts for ToS violations. User's right to deactivate account.
+Dispute Resolution (Platform Level): Process for reporting issues to ConnectSphere. Admin mediation is a courtesy, not a legal obligation for user-to-user disputes.
+Governing Law & Jurisdiction: Indian law, courts in a specified Indian city.
+Modifications to Terms: How ToS may be updated and users notified.
+Contact Information.
+Severability, Waiver, Entire Agreement clauses.
+
