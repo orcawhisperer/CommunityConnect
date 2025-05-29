@@ -1,5 +1,5 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes'); // Will be created later
+const userRoutes = require('./routes/userRoutes'); // This now imports an object { router, ... }
 
 const app = express();
 
@@ -7,7 +7,8 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 
 // Routes
-app.use('/api/v1/users', userRoutes); // User routes will be mounted here
+// Ensure we are using the router object from the userRoutes module
+app.use('/api/v1/users', userRoutes.router); 
 
 // Basic Error Handling Middleware
 // This should be defined after all other app.use() and routes calls

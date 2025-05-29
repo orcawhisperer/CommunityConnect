@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const db = require('../db');
 const { body, validationResult } = require('express-validator');
 const { generateToken } = require('../utils/jwtHelper');
+const { protect } = require('../middleware/authMiddleware'); // Import protect middleware
 
 const router = express.Router();
 
@@ -31,6 +32,27 @@ const loginValidationRules = [
     .isString().withMessage('Password must be a string')
     .notEmpty().withMessage('Password is required'),
 ];
+
+const updateProfileValidationRules = [
+    body('first_name').optional().isString().isLength({ max: 50 }).withMessage('First name must be a string and max 50 characters.')
+        .matches(/^[A-Za-z\s]+$/).withMessage('First name must only contain alphabetic characters and spaces.'),
+    body('last_name').optional().isString().isLength({ max: 50 }).withMessage('Last name must be a string and max 50 characters.')
+        .matches(/^[A-Za-z\s]+$/).withMessage('Last name must only contain alphabetic characters and spaces.'),
+    body('bio').optional().isString().isLength({ max: 500 }).withMessage('Bio must be a string and max 500 characters.'),
+    body('city').optional().isString().isLength({ max: 100 }).withMessage('City must be a string and max 100 characters.'),
+    body('pincode').optional().isString().isLength({ min:6, max: 6 }).withMessage('Pincode must be 6 digits.')
+        .isNumeric().withMessage('Pincode must be numeric.'),
+    body('general_availability').optional().isString().isLength({ max: 255 }).withMessage('General availability must be a string and max 255 characters.'),
+    // Custom validation to ensure at least one field is present
+    body().custom((value, { req }) => {
+        const { first_name, last_name, bio, city, pincode, general_availability } = req.body;
+        if (!first_name && !last_name && !bio && !city && !pincode && !general_availability) {
+            throw new Error('At least one field must be provided for update.');
+        }
+        return true;
+    }),
+];
+
 
 // --- Route Handlers ---
 const registerUserHandler = async (req, res, next) => {
@@ -156,14 +178,124 @@ const loginUserHandler = async (req, res, next) => {
   }
 };
 
+const getUserProfileHandler = async (req, res, next) => {
+  try {
+    if (!req.user || !req.user.user_id) {
+      return res.status(401).json({ success: false, message: 'Not authorized, user ID missing.' });
+    }
+    const userId = req.user.user_id;
+    const query = `
+      SELECT 
+        user_id, username, email, first_name, last_name, 
+        profile_picture_url, bio, city, pincode, 
+        general_availability, sphere_credit_balance, 
+        avg_rating, total_reviews_received, status, created_at, updated_at
+      FROM Users 
+      WHERE user_id = $1
+    `;
+    const { rows } = await db.query(query, [userId]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ success: false, message: 'User not found.' });
+    }
+    res.status(200).json({ success: true, user: rows[0] });
+  } catch (error) {
+    console.error('Get profile error:', error);
+    if (!error.status) {
+        error.status = 500;
+    }
+    next(error);
+  }
+};
+
+const updateUserProfileHandler = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const userId = req.user.user_id;
+    const { first_name, last_name, bio, city, pincode, general_availability } = req.body;
+
+    const updateFields = [];
+    const queryParams = [];
+    let paramIndex = 1;
+
+    if (first_name !== undefined) {
+        updateFields.push(`first_name = $${paramIndex++}`);
+        queryParams.push(first_name);
+    }
+    if (last_name !== undefined) {
+        updateFields.push(`last_name = $${paramIndex++}`);
+        queryParams.push(last_name);
+    }
+    if (bio !== undefined) {
+        updateFields.push(`bio = $${paramIndex++}`);
+        queryParams.push(bio);
+    }
+    if (city !== undefined) {
+        updateFields.push(`city = $${paramIndex++}`);
+        queryParams.push(city);
+    }
+    if (pincode !== undefined) {
+        updateFields.push(`pincode = $${paramIndex++}`);
+        queryParams.push(pincode);
+    }
+    if (general_availability !== undefined) {
+        updateFields.push(`general_availability = $${paramIndex++}`);
+        queryParams.push(general_availability);
+    }
+
+    // This check is technically also covered by the custom validator, but good for safety
+    if (updateFields.length === 0) {
+        return res.status(400).json({ success: false, message: 'No fields provided for update.' });
+    }
+
+    // Add updated_at timestamp
+    updateFields.push(`updated_at = CURRENT_TIMESTAMP`);
+    queryParams.push(userId); // For the WHERE clause
+
+    const updateQuery = `
+        UPDATE Users 
+        SET ${updateFields.join(', ')} 
+        WHERE user_id = $${paramIndex}
+        RETURNING user_id, username, email, first_name, last_name, 
+                  profile_picture_url, bio, city, pincode, 
+                  general_availability, sphere_credit_balance, 
+                  avg_rating, total_reviews_received, status, created_at, updated_at;
+    `;
+
+    try {
+        const { rows } = await db.query(updateQuery, queryParams);
+        if (rows.length === 0) {
+            // Should not happen if user_id from token is valid
+            return res.status(404).json({ success: false, message: 'User not found after update attempt.' });
+        }
+        res.status(200).json({ success: true, message: 'Profile updated successfully.', user: rows[0] });
+    } catch (error) {
+        console.error('Update profile error:', error);
+        if (!error.status) {
+            error.status = 500;
+        }
+        next(error);
+    }
+};
+
+
 // --- Router Setup ---
 router.post('/register', registrationValidationRules, registerUserHandler);
 router.post('/login', loginValidationRules, loginUserHandler);
+router.get('/profile', protect, getUserProfileHandler);
+router.put('/profile', protect, updateProfileValidationRules, updateUserProfileHandler); // Add the new protected PUT route
+
 
 module.exports = {
   router, // Export router for app.js
-  registerUserHandler, // Export handler for testing
-  loginUserHandler, // Export handler for testing
-  registrationValidationRules, // Export rules if needed for more complex test setups
-  loginValidationRules
+  registerUserHandler, 
+  loginUserHandler, 
+  getUserProfileHandler, 
+  updateUserProfileHandler, // Export handler for testing
+  registrationValidationRules, 
+  loginValidationRules,
+  updateProfileValidationRules // Export rules for testing
 };

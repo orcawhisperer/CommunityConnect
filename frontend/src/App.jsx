@@ -3,10 +3,11 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import DashboardPage from './pages/DashboardPage';
-import { useAuth } from './contexts/AuthContext'; // Import useAuth
+import ProfilePage from './pages/ProfilePage'; // Import ProfilePage
+import { useAuth } from './contexts/AuthContext';
 import './App.css';
 
-// ProtectedRoute component
+// ProtectedRoute component (already defined here)
 function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
 
@@ -18,7 +19,7 @@ function ProtectedRoute({ children }) {
 }
 
 function App() {
-  const { isAuthenticated, logout, currentUser } = useAuth(); // Get auth state and functions
+  const { isAuthenticated, logout, currentUser } = useAuth();
 
   return (
     <div>
@@ -28,6 +29,7 @@ function App() {
             <>
               <li>Welcome, {currentUser?.username}!</li>
               <li><Link to="/dashboard">Dashboard</Link></li>
+              <li><Link to="/profile">Profile</Link></li> {/* Add Profile Link */}
               <li><button onClick={logout} style={{background: 'none', border: 'none', color: '#333', cursor: 'pointer', padding: 0, textDecoration: 'underline'}}>Logout</button></li>
             </>
           ) : (
@@ -47,6 +49,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/profile"  // Add Profile Route
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           } 
         />

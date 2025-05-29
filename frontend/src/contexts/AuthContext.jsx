@@ -40,10 +40,25 @@ export const AuthProvider = ({ children }) => {
     navigate('/login'); // Redirect to login page after logout
   };
 
+  const updateUserInContext = (updatedUserData) => {
+    setCurrentUser(updatedUserData);
+    // Ensure token still exists before updating localStorage for user,
+    // though in most update scenarios, user should be logged in.
+    if (localStorage.getItem('connectSphereToken')) {
+      localStorage.setItem('connectSphereUser', JSON.stringify(updatedUserData));
+    } else {
+      // This case would be unusual - updating user data without a token.
+      // Decide if you need to handle this (e.g., by logging out, or re-fetching token/user)
+      console.warn("updateUserInContext called but no token found in localStorage.");
+    }
+  };
+
+
   const value = {
     currentUser,
     login,
     logout,
+    updateUserInContext, // Add the new function to the context value
     isAuthenticated: !!currentUser, // Helper to easily check if user is logged in
     loading // Expose loading state for initial auth check
   };
